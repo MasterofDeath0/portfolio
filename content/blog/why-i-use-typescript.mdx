@@ -1,0 +1,50 @@
+---
+title: "Why I Use TypeScript for Everything Now"
+summary: "I resisted TypeScript for a long time. Then I shipped a production bug that would've been caught at compile time. Now I use it everywhere."
+date: "2025-03-22"
+tags: ["typescript", "engineering", "opinion"]
+---
+
+I resisted TypeScript for over a year. 
+
+The mental model felt like overhead. Adding types to JavaScript felt like ceremony — extra boilerplate that slowed you down without obvious payoff. Just ship the thing.
+
+Then I shipped a production bug.
+
+## The Bug
+
+We had an API endpoint that returned a `userId` as a number. The frontend expected it as a string (used as a React key and in URL params). 
+
+In JavaScript, this silently works until it doesn't. The `===` comparison fails. Query params stringify weird. In our case, a filter broke for specific user IDs.
+
+We found it three weeks after release, during a support escalation.
+
+**A TypeScript compiler would have caught this in seconds.**
+
+## What Changed
+
+After that incident I started migrating our codebase to TypeScript. Not gradually — I typed every new file strictly from day one.
+
+Three months later, here's what I noticed:
+
+**1. Fewer runtime surprises.** The "undefined is not a function" class of errors basically disappeared.
+
+**2. Refactoring became safe.** Renaming a prop? TypeScript shows you every place that needs updating. In JavaScript you're grep-ing and hoping.
+
+**3. The IDE became smarter.** Autocomplete that actually knows the shape of your data is a different experience than guessing from docs.
+
+**4. Onboarding improved.** A new dev can read a function signature and understand what it does without tracing through the whole call stack.
+
+## The Overhead Question
+
+Yes, TypeScript adds some setup cost. And strict typing occasionally means writing more code.
+
+But the math is simple: **write an extra line of type code now, or debug a production issue at 2am.**
+
+I pick the extra line every time.
+
+## My Setup
+
+I run TypeScript with `strict: true` everywhere. No `any` (unless wrapping third-party code without types). Zod for runtime validation at API boundaries.
+
+It's not for everyone. But for any project that's going to last more than a few weeks, it's become my default.

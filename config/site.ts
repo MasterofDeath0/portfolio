@@ -1,0 +1,21 @@
+export const siteConfig = {
+  name: "Sanyam Aggarwal",
+  tagline: "Engineer · Builder · Creator",
+  email: "sanyam@example.com",
+  website: "https://sanyamaggarwal.dev",
+  resumeUrl: "/resume",
+  avatarDark: "/assets/avatar-dark.png",
+  avatarLight: "/assets/avatar-light.jpg",
+  description: "I love building cool stuff — software, products, and ideas that matter.",
+  googleAnalyticsId: "",
+  socials: {
+    twitter: "https://x.com/MasterofDeath0",
+    linkedin: "https://linkedin.com/in/sanyamaggarwal",
+    github: "https://github.com/MasterofDeath0",
+    youtube: "",
+    instagram: "",
+    pinterest: "",
+    medium: "",
+    email: "mailto:sanyam@example.com",
+  },
+};

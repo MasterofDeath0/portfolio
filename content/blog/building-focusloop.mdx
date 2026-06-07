@@ -1,0 +1,46 @@
+---
+title: "Building FocusLoop: A Doomscrolling Detox App"
+summary: "How I built a Gen-Z focused app to fight social media addiction — what I learned, what worked, and what didn't."
+date: "2025-05-15"
+tags: ["building", "react", "product"]
+---
+
+## The Problem
+
+I was spending 4–5 hours a day on Instagram Reels and YouTube Shorts. Most of it was mindless — the kind of scrolling where you open the app with no intent and close it 45 minutes later wondering where the time went.
+
+I'm not alone. The average Gen-Z spends **6.5 hours on screens daily**, most of it passive consumption.
+
+## The Idea
+
+FocusLoop is simple: a 30-day challenge app that replaces your doomscrolling habit with intentional tasks. Each day has 3 tasks. Complete all 3, streak continues. Fail, and you start over.
+
+The psychology is borrowed from habit research — specifically the idea that **replacing a habit** is far more effective than trying to simply eliminate it.
+
+## The Stack
+
+I kept it as lean as possible:
+
+- **React + Vite** — no server needed
+- **Tailwind CSS** — rapid UI iteration
+- **localStorage** — no backend, no auth, no friction
+
+The entire app is a SPA. Data lives in your browser. Nothing is tracked.
+
+## What I Learned
+
+**1. Constraints force creativity.** No backend meant I had to get creative with data structure. Everything is keyed by user state in localStorage.
+
+**2. Dark mode first.** The target user is on their phone at night. A dark, high-contrast UI just makes sense.
+
+**3. Micro-animations matter.** Adding Framer Motion to task completions and streak milestones made the app feel *alive*. Users noticed.
+
+## What Didn't Work
+
+The first version had a complicated onboarding flow. Three screens, a survey, a "commitment" modal. Users bounced. I stripped it to one screen — your challenge starts now.
+
+## The Result
+
+FocusLoop is live. It's not a business. It's a tool I built for myself and shipped because other people might need it too.
+
+That's enough reason.
