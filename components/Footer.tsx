@@ -118,7 +118,7 @@ export default function Footer() {
           <span>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</span>
           <span className="flex items-center gap-1.5">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-            {views !== null ? <>{views} total views</> : <>— views</>}
+            {views !== null ? <>{views} visitors</> : <>— views</>}
           </span>
         </div>
       </div>
