@@ -8,7 +8,7 @@ import Oneko from "@/components/Oneko";
 import { siteConfig } from "@/config/site";
 import Script from "next/script";
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const UMAMI_ID = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
 
 const hanken = Hanken_Grotesk({
   subsets: ["latin"],
@@ -47,17 +47,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${hanken.variable} ${geistMono.variable} antialiased min-h-screen`}>
-        {GA_ID && (
-          <>
-            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
-            <Script id="ga-init" strategy="afterInteractive">{`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${GA_ID}');
-            `}</Script>
-          </>
-        )}
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="69cde2aa-9590-445f-86a0-81775d7eddf2"
+          strategy="afterInteractive"
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
