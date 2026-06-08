@@ -1,7 +1,7 @@
 
 import { NextResponse } from "next/server";
 
-let cached: { data: unknown; ts: number } | null = null;
+let cached: { data: { views: string }; ts: number } | null = null;
 const CACHE_TTL = 60 * 60 * 1000; // 1 hour
 
 export async function GET() {
@@ -32,14 +32,23 @@ export async function GET() {
       }
     );
 
+    if (!response.ok) {
+      return NextResponse.json({
+        views: null,
+        error: await response.text(),
+      });
+    }
+
+    const data = await response.json();
+
     const views = String(data.pageviews ?? 0);
 
-cached = {
-  data: { views },
-  ts: Date.now(),
-};
+    cached = {
+      data: { views },
+      ts: Date.now(),
+    };
 
-return NextResponse.json({ views });
+    return NextResponse.json({ views });
   } catch {
     return NextResponse.json({
       views: null,
@@ -47,4 +56,3 @@ return NextResponse.json({ views });
     });
   }
 }
-
