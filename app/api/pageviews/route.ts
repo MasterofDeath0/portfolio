@@ -1,4 +1,4 @@
-\```ts
+
 import { NextResponse } from "next/server";
 
 let cached: { data: unknown; ts: number } | null = null;
@@ -47,4 +47,4 @@ export async function GET() {
     });
   }
 }
-```
+
