@@ -67,8 +67,6 @@ export async function GET() {
       });
     }
 
-    return NextResponse.json({ isPlaying: false, title: "Not playing anything", artist: "" });
-  } catch {
-    return NextResponse.json({ isPlaying: false, title: "Not playing anything", artist: "" });
-  }
+return NextResponse.json({ isPlaying: false, title: "", artist: "", albumArt: "", songUrl: "", }); } 
+catch { return NextResponse.json({ isPlaying: false, title: "", artist: "", albumArt: "", songUrl: "", }); } 
 }
