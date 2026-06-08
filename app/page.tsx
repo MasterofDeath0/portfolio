@@ -98,11 +98,18 @@ export default async function Home() {
             <div className="flex justify-center pt-1">
               <Link
                 href="/work"
-                className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm transition-colors hover:bg-[--muted]"
+                className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm transition-all duration-200"
                 style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "var(--text-primary)";
+                  (e.currentTarget as HTMLElement).style.color = "var(--text-primary)";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
+                  (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)";
+                }}
               >
                 Show all work experiences
-                <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
               </Link>
             </div>
           </section>
@@ -161,11 +168,18 @@ export default async function Home() {
             <div className="flex justify-center pt-1">
               <Link
                 href="/blog"
-                className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm transition-colors hover:bg-[--muted]"
+                className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm transition-all duration-200"
                 style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "var(--text-primary)";
+                  (e.currentTarget as HTMLElement).style.color = "var(--text-primary)";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
+                  (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)";
+                }}
               >
                 Show all blogs
-                <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
               </Link>
             </div>
           </section>

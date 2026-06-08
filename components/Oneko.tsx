@@ -180,6 +180,20 @@ export default function Oneko() {
       if (!forceSleep) { idleTime = 0; resetIdleAnimation(); }
     };
 
+    // Double-click on neko toggles sleep
+    let lastClickTime = 0;
+    const onNekoClick = () => {
+      const now = Date.now();
+      if (now - lastClickTime < 400) {
+        // double-click
+        forceSleep = !forceSleep;
+        localStorage.setItem("oneko:forceSleep", JSON.stringify(forceSleep));
+        if (!forceSleep) { idleTime = 0; resetIdleAnimation(); }
+      }
+      lastClickTime = now;
+    };
+    if (nekoEl) nekoEl.addEventListener("click", onNekoClick);
+
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
@@ -188,6 +202,7 @@ export default function Oneko() {
 
     return () => {
       cancelAnimationFrame(rafId);
+      if (nekoEl) nekoEl.removeEventListener("click", onNekoClick);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchstart", onTouchStart);
@@ -201,6 +216,7 @@ export default function Oneko() {
       ref={nekoRef}
       id="oneko"
       aria-hidden="true"
+      title="Double-click to sleep/wake"
       style={{
         width: 32, height: 32,
         position: "fixed",
@@ -208,7 +224,8 @@ export default function Oneko() {
         left: 16, top: 16,
         zIndex: 99999,
         backgroundSize: "auto",
-        pointerEvents: "none",
+        pointerEvents: "auto",
+        cursor: "pointer",
       }}
     />
   );

@@ -8,15 +8,12 @@ import { useEffect, useState, useRef } from "react";
 import { CommandPalette } from "./CommandPalette";
 
 const moreLinks = [
-  { href: "/work", label: "Work" },
-  { href: "/blog", label: "Blog" },
   { href: "/projects", label: "Projects" },
   { href: "/gears", label: "Gears" },
   { href: "/books", label: "Books" },
   { href: "/movies", label: "Movies" },
   { href: "/academics", label: "Academics" },
   { href: "/achievements", label: "Achievements" },
-  { href: "/about", label: "About" },
 ];
 
 const globalNavShortcuts: Record<string, string> = {
@@ -85,8 +82,8 @@ export default function Navbar() {
   return (
     <>
       <header
-        className="sticky top-0 z-50 border-b"
-        style={{ backgroundColor: "var(--background)", borderColor: "var(--border)" }}
+        className="sticky top-0 z-50"
+        style={{ backgroundColor: "var(--background)" }}
       >
         <div className="container mx-auto max-w-2xl px-4">
           <div className="flex items-center justify-between h-14">
@@ -104,14 +101,25 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="/about"
+                href="/work"
                 className="shrink-0 transition-colors hover:text-[--text-primary]"
                 style={{
-                  color: pathname === "/about" ? "var(--text-primary)" : "var(--text-secondary)",
-                  fontWeight: pathname === "/about" ? 600 : 400,
+                  color: pathname === "/work" ? "var(--text-primary)" : "var(--text-secondary)",
+                  fontWeight: pathname === "/work" ? 600 : 400,
                 }}
               >
-                About
+                Work
+              </Link>
+
+              <Link
+                href="/blog"
+                className="shrink-0 transition-colors hover:text-[--text-primary]"
+                style={{
+                  color: pathname === "/blog" ? "var(--text-primary)" : "var(--text-secondary)",
+                  fontWeight: pathname === "/blog" ? 600 : 400,
+                }}
+              >
+                Blogs
               </Link>
 
               <div className="relative" ref={moreRef}>
