@@ -6,6 +6,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Oneko from "@/components/Oneko";
 import { siteConfig } from "@/config/site";
+import Script from "next/script";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 const hanken = Hanken_Grotesk({
   subsets: ["latin"],
@@ -44,6 +47,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${hanken.variable} ${geistMono.variable} antialiased min-h-screen`}>
+        {GA_ID && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+            <Script id="ga-init" strategy="afterInteractive">{`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_ID}');
+            `}</Script>
+          </>
+        )}
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
