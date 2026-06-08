@@ -32,14 +32,14 @@ export async function GET() {
       }
     );
 
-    const data = await response.json();
+    const views = String(data.pageviews ?? 0);
 
-    cached = {
-      data,
-      ts: Date.now(),
-    };
+cached = {
+  data: { views },
+  ts: Date.now(),
+};
 
-    return NextResponse.json(data);
+return NextResponse.json({ views });
   } catch {
     return NextResponse.json({
       views: null,
