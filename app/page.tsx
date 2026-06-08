@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
+import ShowAllButton from "@/components/ShowAllButton";
 import { siteConfig } from "@/config/site";
 import { experiences } from "@/config/experience";
 import ThemeImage from "@/components/ThemeImage";
@@ -96,21 +97,7 @@ export default async function Home() {
               ))}
             </div>
             <div className="flex justify-center pt-1">
-              <Link
-                href="/work"
-                className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm transition-all duration-200"
-                style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "var(--text-primary)";
-                  (e.currentTarget as HTMLElement).style.color = "var(--text-primary)";
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-                  (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)";
-                }}
-              >
-                Show all work experiences
-              </Link>
+              <ShowAllButton href="/work" label="Show all work experiences" />
             </div>
           </section>
         </div>
@@ -166,21 +153,7 @@ export default async function Home() {
               )}
             </div>
             <div className="flex justify-center pt-1">
-              <Link
-                href="/blog"
-                className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm transition-all duration-200"
-                style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "var(--text-primary)";
-                  (e.currentTarget as HTMLElement).style.color = "var(--text-primary)";
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-                  (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)";
-                }}
-              >
-                Show all blogs
-              </Link>
+              <ShowAllButton href="/blog" label="Show all blogs" />
             </div>
           </section>
         </div>
