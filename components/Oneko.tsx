@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
+const VARIANTS = ["classic", "dog", "tora", "maia", "vaporwave", "ramxcodes"];
+
 export default function Oneko() {
   const nekoRef = useRef<HTMLDivElement>(null);
 
@@ -9,16 +11,38 @@ export default function Oneko() {
     const nekoEl = nekoRef.current;
     if (!nekoEl) return;
 
+    const isReducedMotion =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isReducedMotion) return;
+
+    function parseLS<T>(key: string, fallback: T): T {
+      try {
+        const v = JSON.parse(localStorage.getItem(`oneko:${key}`) || "null");
+        return v !== null ? (v as T) : fallback;
+      } catch { return fallback; }
+    }
+
+    // Pick a random variant on every fresh visit (no saved variant = random)
+    const savedVariant = localStorage.getItem("oneko:variant");
+    let variant: string;
+    if (savedVariant) {
+      try { variant = JSON.parse(savedVariant); }
+      catch { variant = VARIANTS[Math.floor(Math.random() * VARIANTS.length)]; }
+    } else {
+      variant = VARIANTS[Math.floor(Math.random() * VARIANTS.length)];
+      localStorage.setItem("oneko:variant", JSON.stringify(variant));
+    }
+
+    let forceSleep = parseLS<boolean>("forceSleep", false);
+
     let nekoPosX = 32, nekoPosY = 32;
     let mousePosX = 0, mousePosY = 0;
     let frameCount = 0;
     let idleTime = 0;
     let idleAnimation: string | null = null;
     let idleAnimationFrame = 0;
-    let forceSleep = false;
-    let autoSleepActive = false;
-    let variant = "classic";
-    let animFrameId: number;
+    let lastTimestamp = 0;
+    let rafId: number;
 
     const nekoSpeed = 10;
     const spriteSets: Record<string, number[][]> = {
@@ -41,19 +65,7 @@ export default function Oneko() {
       NW: [[-1, 0], [-1, -1]],
     };
 
-    function parseLocalStorage(key: string, fallback: unknown) {
-      try {
-        const value = JSON.parse(localStorage.getItem(`oneko:${key}`) || "null");
-        return typeof value === typeof fallback ? value : fallback;
-      } catch { return fallback; }
-    }
-
-    // Load saved variant
-    variant = parseLocalStorage("variant", "classic") as string;
-    forceSleep = parseLocalStorage("forceSleep", false) as boolean;
-
     nekoEl.style.backgroundImage = `url('/oneko/oneko-${variant}.gif')`;
-    nekoEl.style.display = "block";
 
     function setSprite(name: string, frame: number) {
       const sprite = spriteSets[name];
@@ -69,7 +81,7 @@ export default function Oneko() {
 
     function idle() {
       idleTime += 1;
-      if (idleTime > 10 && idleAnimation == null) {
+      if (idleTime > 10 && Math.floor(Math.random() * 200) === 0 && idleAnimation == null) {
         const available = ["sleeping", "scratchSelf"];
         if (nekoPosX < 32) available.push("scratchWallW");
         if (nekoPosY < 32) available.push("scratchWallN");
@@ -104,10 +116,7 @@ export default function Oneko() {
       const diffY = nekoPosY - mousePosY;
       const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
 
-      if (distance < nekoSpeed || distance < 48) {
-        idle();
-        return;
-      }
+      if (distance < nekoSpeed || distance < 48) { idle(); return; }
 
       idleAnimation = null;
       idleAnimationFrame = 0;
@@ -132,74 +141,52 @@ export default function Oneko() {
       nekoEl!.style.top = `${nekoPosY - 16}px`;
     }
 
-    // Mouse tracking
-    const onMouseMove = (e: MouseEvent) => {
-      mousePosX = e.clientX;
-      mousePosY = e.clientY;
-    };
-
-    // Touch tracking — mobile support
-    const onTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        mousePosX = e.touches[0].clientX;
-        mousePosY = e.touches[0].clientY;
+    // Throttled to ~100ms per frame — matches original oneko.js
+    function onAnimationFrame(timestamp: number) {
+      if (!nekoEl || !nekoEl.isConnected) return;
+      if (timestamp - lastTimestamp > 100) {
+        lastTimestamp = timestamp;
+        frame();
       }
+      rafId = requestAnimationFrame(onAnimationFrame);
+    }
+    rafId = requestAnimationFrame(onAnimationFrame);
+
+    // Event listeners
+    const onMouseMove = (e: MouseEvent) => { mousePosX = e.clientX; mousePosY = e.clientY; };
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) { mousePosX = e.touches[0].clientX; mousePosY = e.touches[0].clientY; }
     };
     const onTouchStart = (e: TouchEvent) => {
       if (e.touches.length > 0) {
-        mousePosX = e.touches[0].clientX;
-        mousePosY = e.touches[0].clientY;
-        if (forceSleep) {
-          forceSleep = false;
-          autoSleepActive = false;
-          resetIdleAnimation();
-        }
+        mousePosX = e.touches[0].clientX; mousePosY = e.touches[0].clientY;
+        if (forceSleep) { forceSleep = false; localStorage.setItem("oneko:forceSleep", "false"); resetIdleAnimation(); }
       }
+    };
+
+    const onChangeVariant = () => {
+      const idx = VARIANTS.indexOf(variant);
+      variant = VARIANTS[(idx + 1) % VARIANTS.length];
+      localStorage.setItem("oneko:variant", JSON.stringify(variant));
+      if (nekoEl) nekoEl.style.backgroundImage = `url("/oneko/oneko-${variant}.gif")`;
+    };
+    const onToggleSleep = () => {
+      forceSleep = !forceSleep;
+      localStorage.setItem("oneko:forceSleep", JSON.stringify(forceSleep));
+      if (!forceSleep) { idleTime = 0; resetIdleAnimation(); }
     };
 
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("touchmove", onTouchMove, { passive: true });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
-
-    // Variant change via custom event
-    const onSetVariant = (e: Event) => {
-      const detail = (e as CustomEvent).detail;
-      if (typeof detail === "string") {
-        variant = detail;
-        localStorage.setItem("oneko:variant", JSON.stringify(variant));
-        nekoEl!.style.backgroundImage = `url('/oneko/oneko-${variant}.gif')`;
-      }
-    };
-    const onChangeVariant = () => {
-      const variants = ["classic", "dog", "tora", "maia", "vaporwave", "ramxcodes"];
-      const idx = variants.indexOf(variant);
-      variant = variants[(idx + 1) % variants.length];
-      localStorage.setItem("oneko:variant", JSON.stringify(variant));
-      nekoEl!.style.backgroundImage = `url('/oneko/oneko-${variant}.gif')`;
-    };
-    const onToggleSleep = () => {
-      forceSleep = !forceSleep;
-      localStorage.setItem("oneko:forceSleep", JSON.stringify(forceSleep));
-      if (!forceSleep) resetIdleAnimation();
-    };
-
-    window.addEventListener("oneko:set-variant", onSetVariant);
     window.addEventListener("oneko:change-variant", onChangeVariant);
     window.addEventListener("oneko:toggle-sleep", onToggleSleep);
 
-    // Animation loop
-    const loop = () => {
-      frame();
-      animFrameId = requestAnimationFrame(loop);
-    };
-    animFrameId = requestAnimationFrame(loop);
-
     return () => {
-      cancelAnimationFrame(animFrameId);
+      cancelAnimationFrame(rafId);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("oneko:set-variant", onSetVariant);
       window.removeEventListener("oneko:change-variant", onChangeVariant);
       window.removeEventListener("oneko:toggle-sleep", onToggleSleep);
     };
@@ -209,18 +196,16 @@ export default function Oneko() {
     <div
       ref={nekoRef}
       id="oneko"
+      aria-hidden="true"
       style={{
-        width: 32,
-        height: 32,
+        width: 32, height: 32,
         position: "fixed",
         imageRendering: "pixelated",
-        left: 16,
-        top: 16,
+        left: 16, top: 16,
         zIndex: 99999,
         backgroundSize: "256px 256px",
         pointerEvents: "none",
       }}
-      aria-hidden="true"
     />
   );
 }

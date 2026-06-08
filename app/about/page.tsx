@@ -1,5 +1,5 @@
 import { siteConfig } from "@/config/site";
-import { quotes } from "@/config/quotes";
+
 import QuoteBlock from "@/components/QuoteBlock";
 import ThemeImage from "@/components/ThemeImage";
 import Link from "next/link";
@@ -68,7 +68,7 @@ const socialLinks = [
   { label: "Topmate", href: siteConfig.socials.topmate, Icon: IconTopmate },
 ].filter((l) => l.href);
 
-const quoteIndex = 1;
+
 
 export default function AboutPage() {
   return (
@@ -193,7 +193,7 @@ export default function AboutPage() {
       </section>
 
       {/* Quote */}
-      <QuoteBlock index={quoteIndex} />
+      <QuoteBlock />
     </div>
   );
 }

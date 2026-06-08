@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useCallback } from "react";
 import {
   Home, Briefcase, BookOpen, FolderOpen,
-  Settings, Book, Film, Moon, Sun, Shuffle, User, Info
+  Settings, Book, Film, Moon, Sun, Image, User, Info, FileText
 } from "lucide-react";
 
 interface Props {
@@ -15,15 +15,28 @@ interface Props {
 }
 
 const navItems = [
-  { label: "Go to Home", sub: "Homepage", href: "/", icon: Home, shortcut: "H" },
-  { label: "Go to About", sub: "About me", href: "/about", icon: Info, shortcut: "A" },
-  { label: "Go to Work", sub: "Work experience", href: "/work", icon: Briefcase, shortcut: "W" },
-  { label: "Go to Blog", sub: "Articles & thoughts", href: "/blog", icon: BookOpen, shortcut: "B" },
-  { label: "Go to Projects", sub: "Things I've built", href: "/projects", icon: FolderOpen, shortcut: "P" },
-  { label: "Go to Gears", sub: "Hardware & software", href: "/gears", icon: Settings, shortcut: "G" },
-  { label: "Go to Books", sub: "Reading list", href: "/books", icon: Book, shortcut: "K" },
-  { label: "Go to Movies", sub: "Films & shows", href: "/movies", icon: Film, shortcut: "M" },
+  { label: "Go to Home",     sub: "Homepage",             href: "/",        icon: Home,     shortcut: "H" },
+  { label: "Go to About",    sub: "About me",             href: "/about",   icon: Info,     shortcut: "A" },
+  { label: "Go to Work",     sub: "Work experience",      href: "/work",    icon: Briefcase,shortcut: "W" },
+  { label: "Go to Blog",     sub: "Articles & thoughts",  href: "/blog",    icon: BookOpen, shortcut: "B" },
+  { label: "Go to Projects", sub: "Things I've built",    href: "/projects",icon: FolderOpen,shortcut: "P" },
+  { label: "Go to Gears",    sub: "Hardware & software",  href: "/gears",   icon: Settings, shortcut: "G" },
+  { label: "Go to Books",    sub: "Reading list",         href: "/books",   icon: Book,     shortcut: "K" },
+  { label: "Go to Movies",   sub: "Films & shows",        href: "/movies",  icon: Film,     shortcut: "M" },
+  { label: "View Resume",    sub: "Download / view CV",   href: "/resume",  icon: FileText, shortcut: "R" },
 ];
+
+// Kbd badge component
+function Kbd({ children }: { children: React.ReactNode }) {
+  return (
+    <kbd
+      className="text-[11px] px-1.5 py-0.5 rounded-md border font-mono shrink-0 flex items-center gap-0.5"
+      style={{ borderColor: "var(--border)", color: "var(--muted-foreground)", background: "var(--muted)" }}
+    >
+      {children}
+    </kbd>
+  );
+}
 
 export function CommandPalette({ open, setOpen }: Props) {
   const router = useRouter();
@@ -31,18 +44,38 @@ export function CommandPalette({ open, setOpen }: Props) {
 
   const close = useCallback(() => setOpen(false), [setOpen]);
 
-  // Single-letter shortcuts
   useEffect(() => {
     if (!open) return;
     const handler = (e: KeyboardEvent) => {
+      // ⌘Z — toggle sleep
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "z") {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent("oneko:toggle-sleep"));
+        close();
+        return;
+      }
+      // ⌘X — change avatar
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "x") {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent("oneko:change-variant"));
+        close();
+        return;
+      }
       if (e.metaKey || e.ctrlKey || e.altKey) return;
+      // Single-letter nav shortcuts
       const item = navItems.find((n) => n.shortcut.toLowerCase() === e.key.toLowerCase());
-      if (item) { router.push(item.href); close(); }
+      if (item) { router.push(item.href); close(); return; }
+      // T — toggle theme
+      if (e.key.toLowerCase() === "t") {
+        setTheme(theme === "dark" ? "light" : "dark");
+        close();
+        return;
+      }
       if (e.key === "Escape") close();
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [open, router, close]);
+  }, [open, router, close, theme, setTheme]);
 
   if (!open) return null;
 
@@ -60,13 +93,7 @@ export function CommandPalette({ open, setOpen }: Props) {
           background: "var(--background)",
         }}
       >
-        <Command
-          style={{
-            background: "transparent",
-            borderRadius: "1.25rem",
-            overflow: "hidden",
-          }}
-        >
+        <Command style={{ background: "transparent", borderRadius: "1.25rem", overflow: "hidden" }}>
           <Command.Input
             placeholder="Search or jump to..."
             autoFocus
@@ -89,6 +116,7 @@ export function CommandPalette({ open, setOpen }: Props) {
               No results found.
             </Command.Empty>
 
+            {/* Navigation */}
             <Command.Group
               heading="Navigation"
               style={{ padding: "0.25rem 0.5rem", fontSize: "0.7rem", letterSpacing: "0.1em", color: "var(--muted-foreground)", textTransform: "uppercase", fontWeight: 600 }}
@@ -97,17 +125,7 @@ export function CommandPalette({ open, setOpen }: Props) {
                 <Command.Item
                   key={item.href}
                   onSelect={() => { router.push(item.href); close(); }}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.75rem",
-                    padding: "0.625rem 0.75rem",
-                    borderRadius: "0.75rem",
-                    cursor: "pointer",
-                    fontSize: "0.875rem",
-                    color: "var(--text-primary)",
-                    marginTop: "0.125rem",
-                  }}
+                  style={{ display: "flex", alignItems: "center", gap: "0.75rem", padding: "0.625rem 0.75rem", borderRadius: "0.75rem", cursor: "pointer", fontSize: "0.875rem", color: "var(--text-primary)", marginTop: "0.125rem" }}
                   className="cmdk-item"
                 >
                   <item.icon size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
@@ -115,18 +133,14 @@ export function CommandPalette({ open, setOpen }: Props) {
                     <span>{item.label}</span>
                     <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>{item.sub}</span>
                   </div>
-                  <kbd
-                    className="text-[11px] px-1.5 py-0.5 rounded-md border font-mono shrink-0"
-                    style={{ borderColor: "var(--border)", color: "var(--muted-foreground)", background: "var(--muted)" }}
-                  >
-                    {item.shortcut}
-                  </kbd>
+                  <Kbd>{item.shortcut}</Kbd>
                 </Command.Item>
               ))}
             </Command.Group>
 
-            <Command.Separator style={{ height: "1px", background: "var(--border)", margin: "0.5rem 0.5rem" }} />
+            <Command.Separator style={{ height: "1px", background: "var(--border)", margin: "0.5rem" }} />
 
+            {/* Oneko */}
             <Command.Group
               heading="Oneko"
               style={{ padding: "0.25rem 0.5rem", fontSize: "0.7rem", letterSpacing: "0.1em", color: "var(--muted-foreground)", textTransform: "uppercase", fontWeight: 600 }}
@@ -138,25 +152,28 @@ export function CommandPalette({ open, setOpen }: Props) {
               >
                 <Moon size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
                 <div className="flex flex-col flex-1">
-                  <span style={{ color: "var(--text-primary)", fontSize: "0.875rem" }}>Toggle Sleep</span>
-                  <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>Make the cat sleep or wake up</span>
+                  <span style={{ color: "var(--text-primary)", fontSize: "0.875rem" }}>Toggle Oneko Sleep</span>
+                  <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>Put the neko to sleep or wake it up</span>
                 </div>
+                <Kbd><span>⌘</span><span>Z</span></Kbd>
               </Command.Item>
               <Command.Item
                 onSelect={() => { window.dispatchEvent(new CustomEvent("oneko:change-variant")); close(); }}
                 style={{ display: "flex", alignItems: "center", gap: "0.75rem", padding: "0.625rem 0.75rem", borderRadius: "0.75rem", cursor: "pointer", marginTop: "0.125rem" }}
                 className="cmdk-item"
               >
-                <Shuffle size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
+                <Image size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
                 <div className="flex flex-col flex-1">
-                  <span style={{ color: "var(--text-primary)", fontSize: "0.875rem" }}>Change Cat Skin</span>
-                  <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>Cycle through variants</span>
+                  <span style={{ color: "var(--text-primary)", fontSize: "0.875rem" }}>Change Oneko Avatar</span>
+                  <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>Cycle to the next neko variant</span>
                 </div>
+                <Kbd><span>⌘</span><span>X</span></Kbd>
               </Command.Item>
             </Command.Group>
 
-            <Command.Separator style={{ height: "1px", background: "var(--border)", margin: "0.5rem 0.5rem" }} />
+            <Command.Separator style={{ height: "1px", background: "var(--border)", margin: "0.5rem" }} />
 
+            {/* Theme */}
             <Command.Group
               heading="Theme"
               style={{ padding: "0.25rem 0.5rem", fontSize: "0.7rem", letterSpacing: "0.1em", color: "var(--muted-foreground)", textTransform: "uppercase", fontWeight: 600 }}
@@ -170,9 +187,12 @@ export function CommandPalette({ open, setOpen }: Props) {
                   ? <Sun size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
                   : <Moon size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
                 }
-                <span style={{ color: "var(--text-primary)", fontSize: "0.875rem" }}>
-                  Switch to {theme === "dark" ? "Light" : "Dark"} Mode
-                </span>
+                <div className="flex flex-col flex-1">
+                  <span style={{ color: "var(--text-primary)", fontSize: "0.875rem" }}>
+                    Switch to {theme === "dark" ? "Light" : "Dark"} Mode
+                  </span>
+                </div>
+                <Kbd>T</Kbd>
               </Command.Item>
             </Command.Group>
           </Command.List>

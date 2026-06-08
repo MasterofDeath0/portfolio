@@ -2,12 +2,12 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { experiences } from "@/config/experience";
-import { quotes } from "@/config/quotes";
 import ThemeImage from "@/components/ThemeImage";
 import SpotifyNowPlaying from "@/components/SpotifyNowPlaying";
 import HeroEmailCopy from "@/components/HeroEmailCopy";
 import ExperienceItem from "@/components/ExperienceItem";
 import QuoteBlock from "@/components/QuoteBlock";
+import PageTransition from "@/components/PageTransition";
 import { getBlogPosts } from "@/lib/blog";
 import {
   IconTwitter, IconLinkedin, IconInstagram,
@@ -15,15 +15,13 @@ import {
 } from "@/components/SocialIcons";
 import { formatDate } from "@/lib/utils";
 
-const quoteIndex = Math.floor(Math.random() * quotes.length);
-
 const socialLinks = [
-  { label: "X", href: siteConfig.socials.twitter, Icon: IconTwitter },
-  { label: "LinkedIn", href: siteConfig.socials.linkedin, Icon: IconLinkedin },
-  { label: "Instagram", href: siteConfig.socials.instagram, Icon: IconInstagram },
-  { label: "Medium", href: siteConfig.socials.medium, Icon: IconMedium },
-  { label: "Substack", href: siteConfig.socials.substack, Icon: IconSubstack },
-  { label: "Topmate", href: siteConfig.socials.topmate, Icon: IconTopmate },
+  { label: "X",         href: siteConfig.socials.twitter,   Icon: IconTwitter  },
+  { label: "LinkedIn",  href: siteConfig.socials.linkedin,  Icon: IconLinkedin },
+  { label: "Instagram", href: siteConfig.socials.instagram, Icon: IconInstagram},
+  { label: "Medium",    href: siteConfig.socials.medium,    Icon: IconMedium   },
+  { label: "Substack",  href: siteConfig.socials.substack,  Icon: IconSubstack },
+  { label: "Topmate",   href: siteConfig.socials.topmate,   Icon: IconTopmate  },
 ].filter((l) => l.href);
 
 export default async function Home() {
@@ -32,150 +30,152 @@ export default async function Home() {
   const previewExperiences = experiences.slice(0, 3);
 
   return (
-    <div className="space-y-14 pt-8 pb-16">
-      <div className="container mx-auto max-w-2xl px-4">
-        {/* Hero — avatar LEFT + name/tagline RIGHT */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-4">
-            <ThemeImage />
-            <div className="space-y-1">
-              <h1 className="text-xl font-semibold" style={{ color: "var(--text-primary)" }}>
-                {siteConfig.name}
-              </h1>
-              <div className="flex flex-wrap items-center gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
-                <span>{siteConfig.tagline}</span>
-                <span style={{ color: "var(--text-dim)" }}>·</span>
-                <HeroEmailCopy />
+    <PageTransition>
+      <div className="space-y-14 pt-8 pb-16">
+        <div className="container mx-auto max-w-2xl px-4">
+          {/* Hero — avatar LEFT + name/tagline RIGHT */}
+          <section className="space-y-4">
+            <div className="flex items-center gap-4">
+              <ThemeImage />
+              <div className="space-y-1">
+                <h1 className="text-xl font-semibold" style={{ color: "var(--text-primary)" }}>
+                  {siteConfig.name}
+                </h1>
+                <div className="flex flex-wrap items-center gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
+                  <span>{siteConfig.tagline}</span>
+                  <span style={{ color: "var(--text-dim)" }}>·</span>
+                  <HeroEmailCopy />
+                </div>
               </div>
             </div>
-          </div>
 
-          <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-            {siteConfig.description}
-          </p>
+            <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+              {siteConfig.description}
+            </p>
 
-          <SpotifyNowPlaying />
+            <SpotifyNowPlaying />
 
-          {/* Social icons — raw, no bordered boxes */}
-          <div className="flex flex-wrap items-center gap-3 pt-1">
-            {socialLinks.map(({ label, href, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="transition-opacity hover:opacity-60"
-                style={{ color: "var(--muted-foreground)" }}
+            {/* Social icons — raw, no bordered boxes */}
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              {socialLinks.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="transition-opacity hover:opacity-60"
+                  style={{ color: "var(--muted-foreground)" }}
+                >
+                  <Icon size={17} />
+                </a>
+              ))}
+              {siteConfig.socials.email && (
+                <a
+                  href={siteConfig.socials.email}
+                  aria-label="Email"
+                  className="transition-opacity hover:opacity-60"
+                  style={{ color: "var(--muted-foreground)" }}
+                >
+                  <Mail size={17} />
+                </a>
+              )}
+            </div>
+          </section>
+        </div>
+
+        {/* Experience */}
+        <div className="container mx-auto max-w-2xl px-4">
+          <section className="space-y-4">
+            <h2 className="text-sm font-semibold uppercase tracking-widest" style={{ color: "var(--muted-foreground)" }}>
+              Experience
+            </h2>
+            <div>
+              {previewExperiences.map((exp, i) => (
+                <ExperienceItem key={i} exp={exp} />
+              ))}
+            </div>
+            <div className="flex justify-center pt-1">
+              <Link
+                href="/work"
+                className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm transition-colors hover:bg-[--muted]"
+                style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
               >
-                <Icon size={17} />
-              </a>
-            ))}
-            {siteConfig.socials.email && (
-              <a
-                href={siteConfig.socials.email}
-                aria-label="Email"
-                className="transition-opacity hover:opacity-60"
-                style={{ color: "var(--muted-foreground)" }}
-              >
-                <Mail size={17} />
-              </a>
-            )}
-          </div>
-        </section>
-      </div>
+                Show all work experiences
+                <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+              </Link>
+            </div>
+          </section>
+        </div>
 
-      {/* Experience */}
-      <div className="container mx-auto max-w-2xl px-4">
-        <section className="space-y-4">
-          <h2 className="text-sm font-semibold uppercase tracking-widest" style={{ color: "var(--muted-foreground)" }}>
-            Experience
-          </h2>
-          <div>
-            {previewExperiences.map((exp, i) => (
-              <ExperienceItem key={i} exp={exp} />
-            ))}
-          </div>
-          <div className="flex justify-center pt-1">
-            <Link
-              href="/work"
-              className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm transition-colors hover:bg-[--muted]"
-              style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
-            >
-              Show all work experiences
-              <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-            </Link>
-          </div>
-        </section>
-      </div>
-
-      {/* Blog */}
-      <div className="container mx-auto max-w-2xl px-4">
-        <section className="space-y-4">
-          <h2 className="text-sm font-semibold uppercase tracking-widest" style={{ color: "var(--muted-foreground)" }}>
-            Blog
-          </h2>
-          <div>
-            {latestPosts.length === 0 ? (
-              <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>No posts yet.</p>
-            ) : (
-              latestPosts.map((post) => {
-                const href = post.link ?? `/blog/${post.slug}`;
-                const isExternal = !!post.link;
-                return (
-                  <a
-                    key={post.slug}
-                    href={href}
-                    {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="block py-3.5 group"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="space-y-0.5 flex-1 min-w-0">
-                        <p
-                          className="text-sm font-medium transition-colors group-hover:opacity-70"
-                          style={{ color: "var(--text-primary)" }}
-                        >
-                          {post.title}
-                        </p>
-                        {post.summary && (
-                          <p className="text-xs line-clamp-1" style={{ color: "var(--muted-foreground)" }}>
-                            {post.summary}
+        {/* Blog */}
+        <div className="container mx-auto max-w-2xl px-4">
+          <section className="space-y-4">
+            <h2 className="text-sm font-semibold uppercase tracking-widest" style={{ color: "var(--muted-foreground)" }}>
+              Blog
+            </h2>
+            <div>
+              {latestPosts.length === 0 ? (
+                <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>No posts yet.</p>
+              ) : (
+                latestPosts.map((post) => {
+                  const href = post.link ?? `/blog/${post.slug}`;
+                  const isExternal = !!post.link;
+                  return (
+                    <a
+                      key={post.slug}
+                      href={href}
+                      {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      className="block py-3.5 group"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="space-y-0.5 flex-1 min-w-0">
+                          <p
+                            className="text-sm font-medium transition-colors group-hover:opacity-70"
+                            style={{ color: "var(--text-primary)" }}
+                          >
+                            {post.title}
                           </p>
-                        )}
-                        <div className="flex items-center gap-1 text-xs" style={{ color: "var(--text-dim)" }}>
-                          <span>📅</span>
-                          <span>{formatDate(post.date)}</span>
+                          {post.summary && (
+                            <p className="text-xs line-clamp-1" style={{ color: "var(--muted-foreground)" }}>
+                              {post.summary}
+                            </p>
+                          )}
+                          <div className="flex items-center gap-1 text-xs" style={{ color: "var(--text-dim)" }}>
+                            <span>📅</span>
+                            <span>{formatDate(post.date)}</span>
+                          </div>
                         </div>
+                        <span
+                          className="text-xs shrink-0 transition-colors group-hover:text-[--text-primary]"
+                          style={{ color: "var(--muted-foreground)" }}
+                        >
+                          Read more →
+                        </span>
                       </div>
-                      <span
-                        className="text-xs shrink-0 transition-colors group-hover:text-[--text-primary]"
-                        style={{ color: "var(--muted-foreground)" }}
-                      >
-                        Read more →
-                      </span>
-                    </div>
-                  </a>
-                );
-              })
-            )}
-          </div>
-          <div className="flex justify-center pt-1">
-            <Link
-              href="/blog"
-              className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm transition-colors hover:bg-[--muted]"
-              style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
-            >
-              Show all blogs
-              <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-            </Link>
-          </div>
-        </section>
-      </div>
+                    </a>
+                  );
+                })
+              )}
+            </div>
+            <div className="flex justify-center pt-1">
+              <Link
+                href="/blog"
+                className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm transition-colors hover:bg-[--muted]"
+                style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
+              >
+                Show all blogs
+                <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+              </Link>
+            </div>
+          </section>
+        </div>
 
-      {/* Quote */}
-      <div className="container mx-auto max-w-2xl px-4">
-        <QuoteBlock index={quoteIndex} />
+        {/* Quote — random on every refresh */}
+        <div className="container mx-auto max-w-2xl px-4">
+          <QuoteBlock />
+        </div>
       </div>
-    </div>
+    </PageTransition>
   );
 }
