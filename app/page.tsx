@@ -38,7 +38,7 @@ export default async function Home() {
             <div className="flex items-center gap-4">
               <ThemeImage />
               <div className="space-y-1">
-                <h1 className="text-xl font-semibold" style={{ color: "var(--text-primary)" }}>
+                <h1 className="text-2xl font-bold" style={{ color: "var(--text-primary)" }}>
                   {siteConfig.name}
                 </h1>
                 <div className="flex flex-wrap items-center gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
@@ -87,7 +87,7 @@ export default async function Home() {
         {/* Experience */}
         <div className="container mx-auto max-w-2xl px-4">
           <section className="space-y-4">
-            <h2 className="text-sm font-semibold uppercase tracking-widest" style={{ color: "var(--muted-foreground)" }}>
+            <h2 className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>
               Experience
             </h2>
             <div>
@@ -111,7 +111,7 @@ export default async function Home() {
         {/* Blog */}
         <div className="container mx-auto max-w-2xl px-4">
           <section className="space-y-4">
-            <h2 className="text-sm font-semibold uppercase tracking-widest" style={{ color: "var(--muted-foreground)" }}>
+            <h2 className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>
               Blog
             </h2>
             <div>

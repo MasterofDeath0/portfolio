@@ -6,7 +6,8 @@ import { useTheme } from "next-themes";
 import { useEffect, useCallback } from "react";
 import {
   Home, Briefcase, BookOpen, FolderOpen,
-  Settings, Book, Film, Moon, Sun, Image, User, Info, FileText
+  Settings, Book, Film, Moon, Sun, Image, User, Info, FileText,
+  GraduationCap, Trophy
 } from "lucide-react";
 
 interface Props {
@@ -23,7 +24,9 @@ const navItems = [
   { label: "Go to Gears",    sub: "Hardware & software",  href: "/gears",   icon: Settings, shortcut: "G" },
   { label: "Go to Books",    sub: "Reading list",         href: "/books",   icon: Book,     shortcut: "K" },
   { label: "Go to Movies",   sub: "Films & shows",        href: "/movies",  icon: Film,     shortcut: "M" },
-  { label: "View Resume",    sub: "Download / view CV",   href: "/resume",  icon: FileText, shortcut: "R" },
+  { label: "View Resume",       sub: "Download / view CV",      href: "/resume",       icon: FileText,     shortcut: "R" },
+  { label: "Go to Academics",  sub: "Education & background",  href: "/academics",    icon: GraduationCap, shortcut: "C" },
+  { label: "Go to Achievements", sub: "Awards & certifications", href: "/achievements", icon: Trophy,       shortcut: "V" },
 ];
 
 // Kbd badge component

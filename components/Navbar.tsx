@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Sun, Moon, Search, ChevronDown } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
@@ -14,8 +14,16 @@ const moreLinks = [
   { href: "/gears", label: "Gears" },
   { href: "/books", label: "Books" },
   { href: "/movies", label: "Movies" },
+  { href: "/academics", label: "Academics" },
+  { href: "/achievements", label: "Achievements" },
   { href: "/about", label: "About" },
 ];
+
+const globalNavShortcuts: Record<string, string> = {
+  h: "/", a: "/about", w: "/work", b: "/blog",
+  p: "/projects", g: "/gears", k: "/books", m: "/movies",
+  r: "/resume", c: "/academics", v: "/achievements",
+};
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
@@ -24,6 +32,7 @@ export default function Navbar() {
   const [moreOpen, setMoreOpen] = useState(false);
   const pathname = usePathname();
   const moreRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -31,22 +40,37 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
+      // Skip if typing in an input/textarea
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || (e.target as HTMLElement)?.isContentEditable) return;
+
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setPaletteOpen((o) => !o);
+        return;
       }
       if ((e.metaKey || e.ctrlKey) && e.key === "z") {
         e.preventDefault();
         window.dispatchEvent(new CustomEvent("oneko:toggle-sleep"));
+        return;
       }
       if ((e.metaKey || e.ctrlKey) && e.key === "x") {
         e.preventDefault();
         window.dispatchEvent(new CustomEvent("oneko:change-variant"));
+        return;
+      }
+
+      // Single-key shortcuts — only when palette is closed and no modifiers
+      if (!e.metaKey && !e.ctrlKey && !e.altKey && !paletteOpen) {
+        const key = e.key.toLowerCase();
+        if (key === "t") { setTheme(theme === "dark" ? "light" : "dark"); return; }
+        const dest = globalNavShortcuts[key];
+        if (dest) { router.push(dest); return; }
       }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, []);
+  }, [paletteOpen, theme, setTheme, router]);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {

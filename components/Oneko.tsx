@@ -112,6 +112,10 @@ export default function Oneko() {
 
     function frame() {
       frameCount += 1;
+
+      // forceSleep: always idle, never move
+      if (forceSleep) { idle(); return; }
+
       const diffX = nekoPosX - mousePosX;
       const diffY = nekoPosY - mousePosY;
       const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
