@@ -21,7 +21,7 @@ export default function WorkPage() {
 
       <div className="space-y-2">
         {experiences.map((exp, i) => (
-          <ExperienceItem key={i} exp={exp} defaultOpen />
+          <ExperienceItem key={i} exp={exp} />
         ))}
       </div>
     </div>
