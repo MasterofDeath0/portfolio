@@ -5,7 +5,7 @@ export const siteConfig = {
   website: "https://sanyamaggarwal.dev",
   resumeUrl: "/resume",
   avatarDark: "/assets/avatar-dark.png",
-  avatarLight: "/assets/avatar-light.jpg",
+  avatarLight: "/assets/avatar-light.png",
   description: "I love building cool stuff — software, products, and ideas that matter.",
   googleAnalyticsId: "",
   socials: {
