@@ -64,7 +64,7 @@ export default function SpotifyNowPlaying() {
       >
         {track.isPlaying
           ? "Currently listening"
-          : "Recently listening to"}{" "}
+          : "Last played"}{" "}
         —
       </span>
 
