@@ -203,7 +203,7 @@ export default function Oneko() {
         imageRendering: "pixelated",
         left: 16, top: 16,
         zIndex: 99999,
-        backgroundSize: "256px 256px",
+        backgroundSize: "auto",
         pointerEvents: "none",
       }}
     />

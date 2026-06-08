@@ -35,6 +35,14 @@ export default function Navbar() {
         e.preventDefault();
         setPaletteOpen((o) => !o);
       }
+      if ((e.metaKey || e.ctrlKey) && e.key === "z") {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent("oneko:toggle-sleep"));
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key === "x") {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent("oneko:change-variant"));
+      }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
