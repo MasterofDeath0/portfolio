@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const VARIANTS = ["classic", "dog", "tora", "maia", "vaporwave", "ramxcodes"];
+const VARIANTS = ["classic", "dog", "tora", "maia", "vaporwave"];
 
 export default function Oneko() {
   const nekoRef = useRef<HTMLDivElement>(null);
