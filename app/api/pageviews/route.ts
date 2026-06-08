@@ -1,6 +1,7 @@
+\```ts
 import { NextResponse } from "next/server";
 
-let cached: { views: string; ts: number } | null = null;
+let cached: { data: unknown; ts: number } | null = null;
 const CACHE_TTL = 60 * 60 * 1000; // 1 hour
 
 export async function GET() {
@@ -15,12 +16,15 @@ export async function GET() {
   }
 
   if (cached && Date.now() - cached.ts < CACHE_TTL) {
-    return NextResponse.json({ views: cached.views });
+    return NextResponse.json(cached.data);
   }
 
   try {
+    const endAt = Date.now();
+    const startAt = new Date("2024-01-01").getTime();
+
     const response = await fetch(
-      `https://api.umami.is/v1/websites/${WEBSITE_ID}/stats`,
+      `https://api.umami.is/v1/websites/${WEBSITE_ID}/stats?startAt=${startAt}&endAt=${endAt}`,
       {
         headers: {
           Authorization: `Bearer ${API_KEY}`,
@@ -28,28 +32,19 @@ export async function GET() {
       }
     );
 
-    if (!response.ok) {
-      const text = await response.text();
-      return NextResponse.json({
-        views: null,
-        error: text,
-      });
-    }
-
     const data = await response.json();
 
-    const views = String(data.pageviews?.value ?? 0);
-
     cached = {
-      views,
+      data,
       ts: Date.now(),
     };
 
-    return NextResponse.json({ views });
-  } catch (error) {
+    return NextResponse.json(data);
+  } catch {
     return NextResponse.json({
       views: null,
       error: "Failed to fetch Umami stats",
     });
   }
 }
+```
