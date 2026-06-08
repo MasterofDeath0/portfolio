@@ -1,22 +1,32 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { Sun, Moon, Search } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Sun, Moon, Search, ChevronDown } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
 import { CommandPalette } from "./CommandPalette";
+
+const moreLinks = [
+  { href: "/work", label: "Work" },
+  { href: "/blog", label: "Blog" },
+  { href: "/projects", label: "Projects" },
+  { href: "/gears", label: "Gears" },
+  { href: "/books", label: "Books" },
+  { href: "/movies", label: "Movies" },
+  { href: "/about", label: "About" },
+];
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const pathname = usePathname();
+  const moreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -30,75 +40,128 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+        setMoreOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
   return (
     <>
       <header
-        className={`sticky top-0 z-50 transition-all duration-200 ${
-          scrolled
-            ? "border-b backdrop-blur-md"
-            : ""
-        }`}
-        style={{
-          backgroundColor: scrolled ? "color-mix(in srgb, var(--background) 85%, transparent)" : "transparent",
-          borderColor: scrolled ? "var(--border)" : "transparent",
-        }}
+        className="sticky top-0 z-50 border-b"
+        style={{ backgroundColor: "var(--background)", borderColor: "var(--border)" }}
       >
         <div className="container mx-auto max-w-2xl px-4">
           <div className="flex items-center justify-between h-14">
-            {/* Left: Logo */}
-            <Link
-              href="/"
-              className="text-sm font-semibold transition-opacity hover:opacity-70"
-              style={{ color: "var(--text-primary)" }}
-            >
-              sanyam.
-            </Link>
+            {/* Left: Nav links */}
+            <nav className="flex items-center gap-5 text-sm font-medium">
+              <Link
+                href="/"
+                className="shrink-0 transition-colors hover:text-[--text-primary]"
+                style={{
+                  color: pathname === "/" ? "var(--text-primary)" : "var(--text-secondary)",
+                  fontWeight: pathname === "/" ? 600 : 400,
+                }}
+              >
+                Home
+              </Link>
 
-            {/* Center: Nav links — hidden on mobile */}
-            <nav className="hidden sm:flex items-center gap-6 text-sm font-medium">
-              {[
-                { href: "/", label: "Home" },
-                { href: "/work", label: "Work" },
-                { href: "/blog", label: "Blog" },
-                { href: "/resume", label: "Resume" },
-              ].map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="transition-colors hover:text-[--text-primary]"
-                  style={{ color: "var(--text-secondary)" }}
+              <Link
+                href="/about"
+                className="shrink-0 transition-colors hover:text-[--text-primary]"
+                style={{
+                  color: pathname === "/about" ? "var(--text-primary)" : "var(--text-secondary)",
+                  fontWeight: pathname === "/about" ? 600 : 400,
+                }}
+              >
+                About
+              </Link>
+
+              <div className="relative" ref={moreRef}>
+                <button
+                  onClick={() => setMoreOpen((o) => !o)}
+                  className="flex items-center gap-1 shrink-0 transition-colors hover:text-[--text-primary]"
+                  style={{ color: moreOpen ? "var(--text-primary)" : "var(--text-secondary)" }}
                 >
-                  {link.label}
-                </Link>
-              ))}
+                  More
+                  <ChevronDown
+                    size={13}
+                    className="transition-transform"
+                    style={{ transform: moreOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                  />
+                </button>
+
+                {moreOpen && (
+                  <div
+                    className="absolute top-full left-0 mt-2 w-40 rounded-xl border shadow-lg py-1 z-50"
+                    style={{ background: "var(--background)", borderColor: "var(--border)" }}
+                  >
+                    {moreLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setMoreOpen(false)}
+                        className="flex items-center px-4 py-2 text-sm transition-colors hover:bg-[--muted]"
+                        style={{
+                          color: pathname === link.href ? "var(--text-primary)" : "var(--text-secondary)",
+                          fontWeight: pathname === link.href ? 600 : 400,
+                        }}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             </nav>
 
-            {/* Right: K button + theme toggle */}
-            <div className="flex items-center gap-2">
+            {/* Right: pill search button + standalone theme icon */}
+            <div className="flex items-center gap-3 ml-4 shrink-0">
+              {/* Pill-shaped search button — matches ss exactly */}
               <button
                 onClick={() => setPaletteOpen(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs transition-colors hover:bg-[--muted]"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm transition-colors hover:bg-[--muted]"
                 style={{
-                  borderColor: "var(--border)",
+                  border: "1px solid var(--border)",
+                  background: "var(--muted)",
                   color: "var(--muted-foreground)",
                 }}
                 aria-label="Open command palette"
               >
-                <Search size={12} />
-                <span className="hidden sm:inline">
-                  <kbd className="font-sans">⌘K</kbd>
-                </span>
-                <span className="sm:hidden">K</span>
+                <Search size={13} />
+                <kbd
+                  className="flex items-center gap-1 font-sans text-xs"
+                  style={{ color: "var(--muted-foreground)" }}
+                >
+                  <span
+                    className="inline-flex items-center justify-center text-xs px-1 py-0.5 rounded"
+                    style={{ background: "var(--border)" }}
+                  >
+                    ⌘
+                  </span>
+                  <span
+                    className="inline-flex items-center justify-center text-xs px-1 py-0.5 rounded"
+                    style={{ background: "var(--border)" }}
+                  >
+                    K
+                  </span>
+                </kbd>
               </button>
 
+              {/* Standalone theme icon — no box, just icon */}
               {mounted && (
                 <button
                   onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className="flex items-center justify-center w-8 h-8 rounded-md transition-colors hover:bg-[--muted]"
+                  className="flex items-center justify-center transition-colors hover:text-[--text-primary]"
                   style={{ color: "var(--muted-foreground)" }}
                   aria-label="Toggle theme"
                 >
-                  {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+                  {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
                 </button>
               )}
             </div>

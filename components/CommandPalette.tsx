@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useEffect, useCallback } from "react";
 import {
-  Home, Briefcase, BookOpen, FileText, FolderOpen,
-  Settings, Terminal, Book, Film, Moon, Sun, Shuffle, Cat
+  Home, Briefcase, BookOpen, FolderOpen,
+  Settings, Book, Film, Moon, Sun, Shuffle, User, Info
 } from "lucide-react";
 
 interface Props {
@@ -16,12 +16,11 @@ interface Props {
 
 const navItems = [
   { label: "Go to Home", sub: "Homepage", href: "/", icon: Home, shortcut: "H" },
+  { label: "Go to About", sub: "About me", href: "/about", icon: Info, shortcut: "A" },
   { label: "Go to Work", sub: "Work experience", href: "/work", icon: Briefcase, shortcut: "W" },
   { label: "Go to Blog", sub: "Articles & thoughts", href: "/blog", icon: BookOpen, shortcut: "B" },
-  { label: "Go to Resume", sub: "Download / view", href: "/resume", icon: FileText, shortcut: "R" },
   { label: "Go to Projects", sub: "Things I've built", href: "/projects", icon: FolderOpen, shortcut: "P" },
   { label: "Go to Gears", sub: "Hardware & software", href: "/gears", icon: Settings, shortcut: "G" },
-  { label: "Go to Terminal", sub: "Shell setup", href: "/terminal", icon: Terminal, shortcut: "T" },
   { label: "Go to Books", sub: "Reading list", href: "/books", icon: Book, shortcut: "K" },
   { label: "Go to Movies", sub: "Films & shows", href: "/movies", icon: Film, shortcut: "M" },
 ];
@@ -53,26 +52,72 @@ export function CommandPalette({ open, setOpen }: Props) {
       style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)" }}
       onClick={(e) => { if (e.target === e.currentTarget) close(); }}
     >
-      <div className="w-full max-w-lg shadow-2xl rounded-xl overflow-hidden">
-        <Command>
-          <Command.Input placeholder="Search or jump to..." autoFocus />
-          <Command.List>
-            <Command.Empty>No results found.</Command.Empty>
+      <div
+        className="w-full max-w-lg shadow-2xl overflow-hidden"
+        style={{
+          borderRadius: "1.25rem",
+          border: "1px solid var(--border)",
+          background: "var(--background)",
+        }}
+      >
+        <Command
+          style={{
+            background: "transparent",
+            borderRadius: "1.25rem",
+            overflow: "hidden",
+          }}
+        >
+          <Command.Input
+            placeholder="Search or jump to..."
+            autoFocus
+            style={{
+              borderRadius: "1.25rem 1.25rem 0 0",
+              background: "transparent",
+              border: "none",
+              borderBottom: "1px solid var(--border)",
+              padding: "0.875rem 1.25rem",
+              fontSize: "0.875rem",
+              color: "var(--text-primary)",
+              outline: "none",
+              width: "100%",
+            }}
+          />
+          <Command.List style={{ maxHeight: "60vh", overflowY: "auto", padding: "0.5rem" }}>
+            <Command.Empty
+              style={{ padding: "1.5rem", textAlign: "center", fontSize: "0.875rem", color: "var(--muted-foreground)" }}
+            >
+              No results found.
+            </Command.Empty>
 
-            <Command.Group heading="Navigation">
+            <Command.Group
+              heading="Navigation"
+              style={{ padding: "0.25rem 0.5rem", fontSize: "0.7rem", letterSpacing: "0.1em", color: "var(--muted-foreground)", textTransform: "uppercase", fontWeight: 600 }}
+            >
               {navItems.map((item) => (
                 <Command.Item
                   key={item.href}
                   onSelect={() => { router.push(item.href); close(); }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.75rem",
+                    padding: "0.625rem 0.75rem",
+                    borderRadius: "0.75rem",
+                    cursor: "pointer",
+                    fontSize: "0.875rem",
+                    color: "var(--text-primary)",
+                    marginTop: "0.125rem",
+                  }}
+                  className="cmdk-item"
                 >
-                  <item.icon size={15} style={{ opacity: 0.6 }} />
+                  <item.icon size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
                   <div className="flex flex-col flex-1 min-w-0">
-                    <span style={{ color: "var(--text-primary)", fontSize: "0.875rem" }}>{item.label}</span>
+                    <span>{item.label}</span>
                     <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>{item.sub}</span>
                   </div>
                   <kbd
-                    className="text-[11px] px-1.5 py-0.5 rounded border font-mono"
-                    style={{ borderColor: "var(--border)", color: "var(--muted-foreground)" }}
+                    className="text-[11px] px-1.5 py-0.5 rounded-md border font-mono shrink-0"
+                    style={{ borderColor: "var(--border)", color: "var(--muted-foreground)", background: "var(--muted)" }}
                   >
                     {item.shortcut}
                   </kbd>
@@ -80,47 +125,53 @@ export function CommandPalette({ open, setOpen }: Props) {
               ))}
             </Command.Group>
 
-            <Command.Separator />
+            <Command.Separator style={{ height: "1px", background: "var(--border)", margin: "0.5rem 0.5rem" }} />
 
-            <Command.Group heading="Oneko">
+            <Command.Group
+              heading="Oneko"
+              style={{ padding: "0.25rem 0.5rem", fontSize: "0.7rem", letterSpacing: "0.1em", color: "var(--muted-foreground)", textTransform: "uppercase", fontWeight: 600 }}
+            >
               <Command.Item
-                onSelect={() => {
-                  window.dispatchEvent(new CustomEvent("oneko:toggle-sleep"));
-                  close();
-                }}
+                onSelect={() => { window.dispatchEvent(new CustomEvent("oneko:toggle-sleep")); close(); }}
+                style={{ display: "flex", alignItems: "center", gap: "0.75rem", padding: "0.625rem 0.75rem", borderRadius: "0.75rem", cursor: "pointer", marginTop: "0.125rem" }}
+                className="cmdk-item"
               >
-                <Moon size={15} style={{ opacity: 0.6 }} />
+                <Moon size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
                 <div className="flex flex-col flex-1">
                   <span style={{ color: "var(--text-primary)", fontSize: "0.875rem" }}>Toggle Sleep</span>
                   <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>Make the cat sleep or wake up</span>
                 </div>
-                <kbd className="text-[11px] px-1.5 py-0.5 rounded border font-mono" style={{ borderColor: "var(--border)", color: "var(--muted-foreground)" }}>⌘Z</kbd>
               </Command.Item>
               <Command.Item
-                onSelect={() => {
-                  window.dispatchEvent(new CustomEvent("oneko:change-variant"));
-                  close();
-                }}
+                onSelect={() => { window.dispatchEvent(new CustomEvent("oneko:change-variant")); close(); }}
+                style={{ display: "flex", alignItems: "center", gap: "0.75rem", padding: "0.625rem 0.75rem", borderRadius: "0.75rem", cursor: "pointer", marginTop: "0.125rem" }}
+                className="cmdk-item"
               >
-                <Shuffle size={15} style={{ opacity: 0.6 }} />
+                <Shuffle size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
                 <div className="flex flex-col flex-1">
-                  <span style={{ color: "var(--text-primary)", fontSize: "0.875rem" }}>Change Avatar</span>
-                  <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>Cycle through skins</span>
+                  <span style={{ color: "var(--text-primary)", fontSize: "0.875rem" }}>Change Cat Skin</span>
+                  <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>Cycle through variants</span>
                 </div>
-                <kbd className="text-[11px] px-1.5 py-0.5 rounded border font-mono" style={{ borderColor: "var(--border)", color: "var(--muted-foreground)" }}>⌘X</kbd>
               </Command.Item>
             </Command.Group>
 
-            <Command.Separator />
+            <Command.Separator style={{ height: "1px", background: "var(--border)", margin: "0.5rem 0.5rem" }} />
 
-            <Command.Group heading="Theme">
-              <Command.Item onSelect={() => { setTheme(theme === "dark" ? "light" : "dark"); close(); }}>
+            <Command.Group
+              heading="Theme"
+              style={{ padding: "0.25rem 0.5rem", fontSize: "0.7rem", letterSpacing: "0.1em", color: "var(--muted-foreground)", textTransform: "uppercase", fontWeight: 600 }}
+            >
+              <Command.Item
+                onSelect={() => { setTheme(theme === "dark" ? "light" : "dark"); close(); }}
+                style={{ display: "flex", alignItems: "center", gap: "0.75rem", padding: "0.625rem 0.75rem", borderRadius: "0.75rem", cursor: "pointer", marginTop: "0.125rem" }}
+                className="cmdk-item"
+              >
                 {theme === "dark"
-                  ? <Sun size={15} style={{ opacity: 0.6 }} />
-                  : <Moon size={15} style={{ opacity: 0.6 }} />
+                  ? <Sun size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
+                  : <Moon size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
                 }
                 <span style={{ color: "var(--text-primary)", fontSize: "0.875rem" }}>
-                  Toggle {theme === "dark" ? "Light" : "Dark"} Mode
+                  Switch to {theme === "dark" ? "Light" : "Dark"} Mode
                 </span>
               </Command.Item>
             </Command.Group>

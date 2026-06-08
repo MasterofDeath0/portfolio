@@ -14,8 +14,9 @@ export const siteConfig = {
     github: "https://github.com/MasterofDeath0",
     youtube: "",
     instagram: "",
-    pinterest: "",
     medium: "",
+    topmate: "",
+    substack: "",
     email: "mailto:sanyam@example.com",
   },
 };

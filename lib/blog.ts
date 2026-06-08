@@ -9,6 +9,7 @@ export interface BlogPost {
   date: string;
   tags: string[];
   image?: string;
+  link?: string;
   content: string;
   readingTime: number;
 }
@@ -34,6 +35,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
         date: data.date ?? "",
         tags: data.tags ?? [],
         image: data.image,
+        link: data.link,
         content,
         readingTime: calcReadingTime(content),
       };

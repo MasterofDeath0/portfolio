@@ -5,26 +5,41 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import type { Experience } from "@/config/experience";
 
-export default function ExperienceItem({ exp, defaultOpen = false }: { exp: Experience; defaultOpen?: boolean }) {
-  const [open, setOpen] = useState(defaultOpen);
+export default function ExperienceItem({ exp }: { exp: Experience }) {
+  const [open, setOpen] = useState(false);
 
   return (
     <div
-      className="border rounded-lg overflow-hidden transition-colors"
-      style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+      className="rounded-lg overflow-hidden transition-colors"
+      style={{ background: "transparent" }}
     >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full text-left px-4 py-4 flex items-start justify-between gap-4 group"
+        className="w-full text-left py-3 flex items-start justify-between gap-4 group"
       >
         <div className="flex flex-col gap-0.5 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
-              {exp.company}
-            </span>
+            {exp.companyUrl ? (
+              <a
+                href={exp.companyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-semibold hover:underline underline-offset-2"
+                style={{ color: "var(--text-primary)" }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {exp.company}
+              </a>
+            ) : (
+              <span className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
+                {exp.company}
+              </span>
+            )}
             {exp.isCurrent && (
-              <span className="text-[11px] px-2 py-0.5 rounded-full font-medium flex items-center gap-1"
-                style={{ background: "rgba(34,197,94,0.12)", color: "#22c55e" }}>
+              <span
+                className="text-[11px] px-2 py-0.5 rounded-full font-medium flex items-center gap-1"
+                style={{ background: "rgba(34,197,94,0.12)", color: "#22c55e" }}
+              >
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block animate-pulse" />
                 Working
               </span>
@@ -55,25 +70,27 @@ export default function ExperienceItem({ exp, defaultOpen = false }: { exp: Expe
             transition={{ duration: 0.2, ease: "easeInOut" }}
             style={{ overflow: "hidden" }}
           >
-            <div className="px-4 pb-4 border-t" style={{ borderColor: "var(--border)" }}>
+            <div className="pb-4 border-t pt-3" style={{ borderColor: "var(--border)" }}>
               {/* Tech stack */}
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {exp.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="text-xs px-2 py-0.5 rounded border"
-                    style={{
-                      borderColor: "var(--border)",
-                      color: "var(--muted-foreground)",
-                      background: "var(--muted)",
-                    }}
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
+              {exp.tech?.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {exp.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="text-xs px-2 py-0.5 rounded border"
+                      style={{
+                        borderColor: "var(--border)",
+                        color: "var(--muted-foreground)",
+                        background: "var(--muted)",
+                      }}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
               {/* Points */}
-              <ul className="mt-3 space-y-1.5">
+              <ul className="space-y-1.5">
                 {exp.points.map((point, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
                     <span className="mt-1.5 w-1 h-1 rounded-full shrink-0" style={{ background: "var(--text-dim)" }} />
@@ -85,6 +102,7 @@ export default function ExperienceItem({ exp, defaultOpen = false }: { exp: Expe
           </motion.div>
         )}
       </AnimatePresence>
+
     </div>
   );
 }

@@ -2,35 +2,59 @@
 
 import Link from "next/link";
 import { Mail } from "lucide-react";
+import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site";
-import { IconGithub, IconTwitter, IconLinkedin, IconYoutube, IconInstagram } from "@/components/SocialIcons";
+import {
+  IconTwitter, IconLinkedin, IconInstagram,
+  IconMedium, IconSubstack, IconTopmate
+} from "@/components/SocialIcons";
 
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/work", label: "Work" },
   { href: "/blog", label: "Blog" },
-  { href: "/resume", label: "Resume" },
   { href: "/projects", label: "Projects" },
   { href: "/gears", label: "Gears" },
-  { href: "/setup", label: "Setup" },
-  { href: "/terminal", label: "Terminal" },
   { href: "/books", label: "Books" },
   { href: "/movies", label: "Movies" },
 ];
 
-const socialLinks = [
-  { label: "X / Twitter", href: siteConfig.socials.twitter, Icon: IconTwitter },
-  { label: "LinkedIn", href: siteConfig.socials.linkedin, Icon: IconLinkedin },
-  { label: "GitHub", href: siteConfig.socials.github, Icon: IconGithub },
-  { label: "YouTube", href: siteConfig.socials.youtube, Icon: IconYoutube },
-  { label: "Instagram", href: siteConfig.socials.instagram, Icon: IconInstagram },
-];
+function usePageViews() {
+  const [views, setViews] = useState<string | null>(null);
+  useEffect(() => {
+    fetch("/api/pageviews")
+      .then((r) => r.json())
+      .then((d) => {
+        if (d.views) {
+          const n = Number(d.views);
+          if (n >= 1000000) setViews(`${(n / 1000000).toFixed(1)}M`);
+          else if (n >= 1000) setViews(`${(n / 1000).toFixed(1)}K`);
+          else setViews(String(n));
+        }
+      })
+      .catch(() => setViews(null));
+  }, []);
+  return views;
+}
 
 export default function Footer() {
+  const views = usePageViews();
+  const s = siteConfig.socials;
+
+  const connectLinks = [
+    { label: "X / Twitter", href: s.twitter, Icon: IconTwitter },
+    { label: "LinkedIn", href: s.linkedin, Icon: IconLinkedin },
+    { label: "Instagram", href: s.instagram, Icon: IconInstagram },
+    { label: "Medium", href: s.medium, Icon: IconMedium },
+    { label: "Substack", href: s.substack, Icon: IconSubstack },
+    { label: "Topmate", href: s.topmate, Icon: IconTopmate },
+  ].filter((l) => l.href);
+
   return (
     <footer
       className="border-t mt-20"
-      style={{ borderColor: "var(--border)", backgroundColor: "color-mix(in srgb, var(--muted) 30%, transparent)" }}
+      style={{ borderColor: "var(--border)" }}
     >
       <div className="container mx-auto max-w-2xl px-4 py-12">
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
@@ -59,24 +83,22 @@ export default function Footer() {
               Connect
             </p>
             <div className="flex flex-wrap gap-2">
-              {socialLinks.map(({ label, href, Icon }) =>
-                href ? (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="flex items-center justify-center w-9 h-9 rounded-lg border transition-colors hover:bg-[--muted] hover:text-[--text-primary]"
-                    style={{ borderColor: "var(--border)", color: "var(--muted-foreground)" }}
-                  >
-                    <Icon size={15} />
-                  </a>
-                ) : null
-              )}
-              {siteConfig.socials.email && (
+              {connectLinks.map(({ label, href, Icon }) => (
                 <a
-                  href={siteConfig.socials.email}
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex items-center justify-center w-9 h-9 rounded-lg border transition-colors hover:bg-[--muted] hover:text-[--text-primary]"
+                  style={{ borderColor: "var(--border)", color: "var(--muted-foreground)" }}
+                >
+                  <Icon size={15} />
+                </a>
+              ))}
+              {s.email && (
+                <a
+                  href={s.email}
                   aria-label="Email"
                   className="flex items-center justify-center w-9 h-9 rounded-lg border transition-colors hover:bg-[--muted] hover:text-[--text-primary]"
                   style={{ borderColor: "var(--border)", color: "var(--muted-foreground)" }}
@@ -94,7 +116,10 @@ export default function Footer() {
           style={{ borderColor: "var(--border)", color: "var(--muted-foreground)" }}
         >
           <span>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</span>
-          <span>Built with Next.js &amp; ☕</span>
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            {views !== null ? <>{views} total views</> : <>— views</>}
+          </span>
         </div>
       </div>
     </footer>
