@@ -182,7 +182,7 @@ export function CommandPalette({ open, setOpen }: Props) {
             {/* Oneko */}
             <Command.Group
               heading="Oneko"
-              style={{ padding: "0.25rem 0.5rem", fontSize: "0.7rem", letterSpacing: "0.1em", color: "var(--muted-foreground)", textTransform: "uppercase", fontWeight: 600 }}
+              style={{ padding: "0.25rem 0.5rem", fontSize: "0.7rem", letterSpacing: "0.1em", color: "var(--muted-foreground)", textTransform: "none", fontWeight: 600 }}
             >
               <Command.Item
                 onSelect={() => { window.dispatchEvent(new CustomEvent("oneko:toggle-sleep")); close(); }}
