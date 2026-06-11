@@ -102,25 +102,14 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="/work"
+                href="/about"
                 className="shrink-0 transition-colors hover:text-[--text-primary]"
                 style={{
-                  color: pathname === "/work" ? "var(--text-primary)" : "var(--text-secondary)",
-                  fontWeight: pathname === "/work" ? 600 : 400,
+                  color: pathname === "/about" ? "var(--text-primary)" : "var(--text-secondary)",
+                  fontWeight: pathname === "/about" ? 600 : 400,
                 }}
               >
-                Work
-              </Link>
-
-              <Link
-                href="/blog"
-                className="shrink-0 transition-colors hover:text-[--text-primary]"
-                style={{
-                  color: pathname === "/blog" ? "var(--text-primary)" : "var(--text-secondary)",
-                  fontWeight: pathname === "/blog" ? 600 : 400,
-                }}
-              >
-                Blogs
+                About
               </Link>
 
               <div className="relative" ref={moreRef}>
