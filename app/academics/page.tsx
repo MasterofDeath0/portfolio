@@ -49,7 +49,9 @@ export default function AcademicsPage() {
                     )}
                   </div>
                   <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
-                    {entry.degree} · {entry.field}
+                    {/*{entry.degree} · {entry.field}*/}
+                    {entry.degree}
+                    {entry.field?.trim() ? ` · ${entry.field}` : ""}
                   </p>
                 </div>
                 <div className="shrink-0 text-right space-y-0.5">
