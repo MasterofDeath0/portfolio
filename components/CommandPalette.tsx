@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useCallback } from "react";
 import {
   Home, Briefcase, BookOpen, FolderOpen,
-  Settings, Book, Film, Moon, Sun, Image, User, Info, FileText,
+  Settings, Book, Film, Moon, Sun, Image, User, Info,
   GraduationCap, Trophy
 } from "lucide-react";
 
@@ -15,18 +15,30 @@ interface Props {
   setOpen: (v: boolean) => void;
 }
 
+// const navItems = [
+//   { label: "Go to Home",     sub: "Navigate to the homepage",             href: "/",        icon: Home,     shortcut: "H" },
+//   { label: "Go to About",    sub: "About me",             href: "/about",   icon: Info,     shortcut: "A" },
+//   { label: "Go to Work",     sub: "Work experience",      href: "/work",    icon: Briefcase,shortcut: "W" },
+//   { label: "Go to Blog",     sub: "Articles & thoughts",  href: "/blog",    icon: BookOpen, shortcut: "B" },
+//   { label: "Go to Projects", sub: "Things I've built",    href: "/projects",icon: FolderOpen,shortcut: "P" },
+//   { label: "Go to Gears",    sub: "Hardware & software",  href: "/gears",   icon: Settings, shortcut: "G" },
+//   { label: "Go to Books",    sub: "Reading list",         href: "/books",   icon: Book,     shortcut: "K" },
+//   { label: "Go to Movies",   sub: "Films & shows",        href: "/movies",  icon: Film,     shortcut: "M" },
+//   // { label: "View Resume",       sub: "Download / view CV",      href: "/resume",       icon: FileText,     shortcut: "R" },
+//   { label: "Go to Academics",  sub: "Education & background",  href: "/academics",    icon: GraduationCap, shortcut: "C" },
+//   { label: "Go to Achievements", sub: "Awards & certifications", href: "/achievements", icon: Trophy,       shortcut: "V" },
+// ];
 const navItems = [
-  { label: "Go to Home",     sub: "Homepage",             href: "/",        icon: Home,     shortcut: "H" },
-  { label: "Go to About",    sub: "About me",             href: "/about",   icon: Info,     shortcut: "A" },
-  { label: "Go to Work",     sub: "Work experience",      href: "/work",    icon: Briefcase,shortcut: "W" },
-  { label: "Go to Blog",     sub: "Articles & thoughts",  href: "/blog",    icon: BookOpen, shortcut: "B" },
-  { label: "Go to Projects", sub: "Things I've built",    href: "/projects",icon: FolderOpen,shortcut: "P" },
-  { label: "Go to Gears",    sub: "Hardware & software",  href: "/gears",   icon: Settings, shortcut: "G" },
-  { label: "Go to Books",    sub: "Reading list",         href: "/books",   icon: Book,     shortcut: "K" },
-  { label: "Go to Movies",   sub: "Films & shows",        href: "/movies",  icon: Film,     shortcut: "M" },
-  { label: "View Resume",       sub: "Download / view CV",      href: "/resume",       icon: FileText,     shortcut: "R" },
-  { label: "Go to Academics",  sub: "Education & background",  href: "/academics",    icon: GraduationCap, shortcut: "C" },
-  { label: "Go to Achievements", sub: "Awards & certifications", href: "/achievements", icon: Trophy,       shortcut: "V" },
+  { label: "Home",         href: "/",             icon: Home,          shortcut: "H" },
+  { label: "About",        href: "/about",        icon: Info,          shortcut: "A" },
+  { label: "Work",         href: "/work",         icon: Briefcase,     shortcut: "W" },
+  { label: "Blog",         href: "/blog",         icon: BookOpen,      shortcut: "B" },
+  { label: "Projects",     href: "/projects",     icon: FolderOpen,    shortcut: "P" },
+  { label: "Academics",    href: "/academics",    icon: GraduationCap, shortcut: "C" },
+  { label: "Books",        href: "/books",        icon: Book,          shortcut: "K" },
+  { label: "Movies",       href: "/movies",       icon: Film,          shortcut: "M" },
+  { label: "Gears",        href: "/gears",        icon: Settings,      shortcut: "G" },
+  { label: "Achievements", href: "/achievements", icon: Trophy,        shortcut: "V" },
 ];
 
 // Kbd badge component
@@ -156,7 +168,7 @@ export function CommandPalette({ open, setOpen }: Props) {
                 <Moon size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
                 <div className="flex flex-col flex-1">
                   <span style={{ color: "var(--text-primary)", fontSize: "0.875rem" }}>Toggle Oneko Sleep</span>
-                  <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>Put the neko to sleep or wake it up</span>
+                  {/* <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>Put the neko to sleep or wake it up</span> */}
                 </div>
                 <Kbd><span>⌘</span><span>Z</span></Kbd>
               </Command.Item>
@@ -168,7 +180,7 @@ export function CommandPalette({ open, setOpen }: Props) {
                 <Image size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
                 <div className="flex flex-col flex-1">
                   <span style={{ color: "var(--text-primary)", fontSize: "0.875rem" }}>Change Oneko Avatar</span>
-                  <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>Cycle to the next neko variant</span>
+                  {/* <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>Cycle to the next neko variant</span> */}
                 </div>
                 <Kbd><span>⌘</span><span>X</span></Kbd>
               </Command.Item>
@@ -179,7 +191,7 @@ export function CommandPalette({ open, setOpen }: Props) {
             {/* Theme */}
             <Command.Group
               heading="Theme"
-              style={{ padding: "0.25rem 0.5rem", fontSize: "0.7rem", letterSpacing: "0.1em", color: "var(--muted-foreground)", textTransform: "uppercase", fontWeight: 600 }}
+              style={{ padding: "0.25rem 0.5rem", fontSize: "0.7rem", letterSpacing: "0.1em", color: "var(--muted-foreground)", textTransform: "none", fontWeight: 600 }}
             >
               <Command.Item
                 onSelect={() => { setTheme(theme === "dark" ? "light" : "dark"); close(); }}
