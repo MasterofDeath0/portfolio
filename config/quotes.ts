@@ -9,24 +9,12 @@ export const quotes: Quote[] = [
     author: "Bhagavad Gita, Chapter 2:47",
   },
   {
-    text: "The best way to predict the future is to create it.",
-    author: "Alan Kay",
-  },
-  {
-    text: "Simplicity is the ultimate sophistication.",
-    author: "Leonardo da Vinci",
+    text: "Whatever you want to do, do with full passion and work really hard towards it. Don't look anywhere else.",
+    author: "Virat Kohli",
   },
   {
     text: "Stay hungry, stay foolish.",
     author: "Steve Jobs",
-  },
-  {
-    text: "Code is like humor. When you have to explain it, it's bad.",
-    author: "Cory House",
-  },
-  {
-    text: "First, solve the problem. Then, write the code.",
-    author: "John Johnson",
   },
   {
     text: "The pain doesn't kill me, it only makes me stronger.",
@@ -37,35 +25,31 @@ export const quotes: Quote[] = [
     author: "Sheryl Sandberg",
   },
   {
-    text: "Talk is cheap. Show me the code.",
-    author: "Linus Torvalds",
-  },
-  {
-    text: "Every master was once a disaster.",
-    author: "T. Harv Eker",
+    text: "Everybody was a nobody before they were a somebody.",
+    author: "Harvey Spectar",
   },
   {
     text: "The only way to do great work is to love what you do.",
     author: "Steve Jobs",
   },
   {
-    text: "Ship early. Ship often. Learn fast.",
-    author: "Silicon Valley Mantra",
+    text: "The only thing you need is an unshakeable belief in yourself.",
+    author: "Harvey Spectar",
   },
   {
-    text: "Ideas are easy. Implementation is hard.",
-    author: "Guy Kawasaki",
+    text: "Face the failure, until the failure fails to face you.",
+    author: "Mahendra Singh Dhoni",
   },
   {
-    text: "Be the change you wish to see in the world.",
-    author: "Mahatma Gandhi",
+    text: "I hated every minute of training, but I said, ‘Don’t quit. Suffer now and live the rest of your life as a champion.",
+    author: "Muhammad Ali",
   },
   {
     text: "A person who never made a mistake never tried anything new.",
     author: "Albert Einstein",
   },
   {
-    text: "The secret of getting ahead is getting started.",
-    author: "Mark Twain",
+    text: "If you want to be successful, learn from other people's mistakes, not from successful stories.",
+    author: "Jack Ma",
   },
 ];
