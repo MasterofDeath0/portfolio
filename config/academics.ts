@@ -11,17 +11,28 @@ export interface AcademicEntry {
 
 export const academics: AcademicEntry[] = [
   {
-    institution: "Your University",
+    institution: "Netaji Subhas University of Technology (erstwhile NSIT), Delhi",
     degree: "Bachelor of Technology",
-    field: "Computer Science & Engineering",
-    period: "2021 – 2025",
-    grade: "8.5 CGPA",
+    field: "Biotechnology",
+    period: "2020 – 2024",
+    grade: "8.6 CGPA",
     location: "India",
     highlights: [
-      "Focused on distributed systems and full-stack development",
-      "Led the tech team at the entrepreneurship cell",
-      "Represented university at national hackathons",
+      "Attained the prestigious Department Rank 1 with an overall CGPA of 8.5, for an impressive streak of 4 consecutive years in college.",
+      "Honoured with the prestigious Vice Chancellor's Gold Medal for graduating as Department Rank 1 in college.",
     ],
-    institutionUrl: "https://example.edu",
+    institutionUrl: "https://nsut.ac.in/en/home",
   },
+  {
+    institution: "Hansraj Model School, Delhi (C.B.S.E.)",
+    degree: "Class XII",
+    field: "Biotechnology",
+    period: "2019 – 2020",
+    grade: "95.2%",
+    location: "India",
+    highlights: [
+      "Achieved the award for academic excellence for 7 consecutive years in school from class 6th to 12th.",
+    ],
+    institutionUrl: "http://hansrajmodelschool.org/",
+  }
 ];
