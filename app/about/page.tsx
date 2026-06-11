@@ -9,56 +9,6 @@ import {
   IconMedium, IconSubstack, IconTopmate
 } from "@/components/SocialIcons";
 
-const academics = [
-  {
-    institution: "Your University",
-    degree: "B.Tech in Computer Science",
-    board: "University of Example",
-    period: "2021 – 2025",
-    type: "Undergraduate",
-    gpa: "8.5 / 10",
-  },
-  {
-    institution: "Your School",
-    degree: "Class XII — Science (PCM + CS)",
-    board: "CBSE Board",
-    period: "2019 – 2021",
-    type: "Senior Secondary",
-    gpa: "92.4%",
-  },
-  {
-    institution: "Your School",
-    degree: "Class X",
-    board: "CBSE Board",
-    period: "2018 – 2019",
-    type: "Secondary",
-    gpa: "95.2%",
-  },
-];
-
-const achievements = [
-  {
-    title: "Hackathon Winner",
-    description: "Won 1st place at [Hackathon Name] — built [Project Name] in 24 hours.",
-    year: "2024",
-  },
-  {
-    title: "Open Source Contributor",
-    description: "Contributed to multiple open source projects with combined 2K+ GitHub stars.",
-    year: "2023",
-  },
-  {
-    title: "Published Writer",
-    description: "Articles featured in [Publication] with 10K+ total reads.",
-    year: "2024",
-  },
-  {
-    title: "Dean's List",
-    description: "Awarded Dean's List recognition for academic excellence.",
-    year: "2022",
-  },
-];
-
 const socialLinks = [
   { label: "X", href: siteConfig.socials.twitter, Icon: IconTwitter },
   { label: "LinkedIn", href: siteConfig.socials.linkedin, Icon: IconLinkedin },
@@ -67,8 +17,6 @@ const socialLinks = [
   { label: "Substack", href: siteConfig.socials.substack, Icon: IconSubstack },
   { label: "Topmate", href: siteConfig.socials.topmate, Icon: IconTopmate },
 ].filter((l) => l.href);
-
-
 
 export default function AboutPage() {
   return (
