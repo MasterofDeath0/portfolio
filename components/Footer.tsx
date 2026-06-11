@@ -102,7 +102,6 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   aria-label={label}
                   className="flex items-center justify-center w-9 h-9 rounded-lg border transition-all duration-200 hover:bg-zinc-800 hover:border-zinc-600 hover:text-white"
-                  {/* className="flex items-center justify-center w-9 h-9 rounded-lg border transition-colors hover:bg-[--muted] hover:text-[--text-primary]" */}
                   style={{
                     borderColor: "var(--border)",
                     color: "var(--muted-foreground)",
@@ -116,7 +115,6 @@ export default function Footer() {
                 <a
                   href={s.email}
                   aria-label="Email"
-                  {/* className="flex items-center justify-center w-9 h-9 rounded-lg border transition-colors hover:bg-[--muted] hover:text-[--text-primary]" */}
                   className="flex items-center justify-center w-9 h-9 rounded-lg border transition-all duration-200 hover:bg-zinc-800 hover:border-zinc-600 hover:text-white"
                   style={{
                     borderColor: "var(--border)",
