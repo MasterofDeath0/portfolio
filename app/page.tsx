@@ -42,11 +42,16 @@ export default async function Home() {
                 <h1 className="text-2xl font-bold" style={{ color: "var(--text-primary)" }}>
                   {siteConfig.name}
                 </h1>
-                <div className="flex flex-wrap items-center gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
+                {/* <div className="flex flex-wrap items-center gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
                   <span>{siteConfig.tagline}</span>
                   <span style={{ color: "var(--text-dim)" }}>·</span>
                   <HeroEmailCopy />
-                </div>
+                </div> */}
+                <p
+                  className="text-sm"
+                  style={{ color: "var(--text-secondary)" }}>
+                  {siteConfig.tagline}
+                </p>
               </div>
             </div>
 
