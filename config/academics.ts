@@ -26,13 +26,23 @@ export const academics: AcademicEntry[] = [
   {
     institution: "Hansraj Model School, Delhi (C.B.S.E.)",
     degree: "Class XII",
-    field: "Biotechnology",
+    field: "PCM",
     period: "2019 – 2020",
     grade: "95.2%",
     location: "India",
     highlights: [
       "Achieved the award for academic excellence for 7 consecutive years in school from class 6th to 12th.",
     ],
+    {
+    institution: "Hansraj Model School, Delhi (C.B.S.E.)",
+    degree: "Class X",
+    field: "",
+    period: "2017 – 2018",
+    grade: "91.4%",
+    location: "India",
+    highlights: [
+      "Achieved the award for academic excellence for 5 consecutive years in school from class 6th to 12th.",
+    ]
     institutionUrl: "http://hansrajmodelschool.org/",
   }
 ];
