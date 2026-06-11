@@ -1,8 +1,7 @@
-
 import { NextResponse } from "next/server";
 
 let cached: { data: { views: string }; ts: number } | null = null;
-const CACHE_TTL = 60 * 60 * 1000; // 1 hour
+const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 
 export async function GET() {
   const WEBSITE_ID = process.env.UMAMI_WEBSITE_ID;
@@ -21,7 +20,7 @@ export async function GET() {
 
   try {
     const endAt = Date.now();
-    const startAt = new Date("2024-01-01").getTime();
+    const startAt = 0; // all-time
 
     const response = await fetch(
       `https://api.umami.is/v1/websites/${WEBSITE_ID}/stats?startAt=${startAt}&endAt=${endAt}`,
@@ -41,6 +40,7 @@ export async function GET() {
 
     const data = await response.json();
 
+    // Use pageviews for the footer count
     const views = String(data.pageviews ?? 0);
 
     cached = {
@@ -49,7 +49,9 @@ export async function GET() {
     };
 
     return NextResponse.json({ views });
-  } catch {
+  } catch (error) {
+    console.error(error);
+
     return NextResponse.json({
       views: null,
       error: "Failed to fetch Umami stats",
