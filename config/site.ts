@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Sanyam Aggarwal",
   tagline: "Curious · Polymath · Koinophobic",
-  // website: "https://sanyamaggarwal.dev",
+  website: "https://sanyamaggarwal.dev",
   // resumeUrl: "/resume",
   avatarDark: "/assets/avatar-dark.png",
   avatarLight: "/assets/avatar-light.png",
