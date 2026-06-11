@@ -9,17 +9,18 @@ import { CommandPalette } from "./CommandPalette";
 
 const moreLinks = [
   { href: "/projects", label: "Projects" },
-  { href: "/gears", label: "Gears" },
+  { href: "/academics", label: "Academics" },
   { href: "/books", label: "Books" },
   { href: "/movies", label: "Movies" },
-  { href: "/academics", label: "Academics" },
+  { href: "/gears", label: "Gears" },
   { href: "/achievements", label: "Achievements" },
 ];
 
 const globalNavShortcuts: Record<string, string> = {
   h: "/", a: "/about", w: "/work", b: "/blog",
   p: "/projects", g: "/gears", k: "/books", m: "/movies",
-  r: "/resume", c: "/academics", v: "/achievements",
+  // r: "/resume", 
+  c: "/academics", v: "/achievements",
 };
 
 export default function Navbar() {
