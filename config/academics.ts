@@ -32,7 +32,9 @@ export const academics: AcademicEntry[] = [
     location: "India",
     highlights: [
       "Achieved the award for academic excellence for 7 consecutive years in school from class 6th to 12th.",
-    ],
+      ],
+    institutionUrl: "http://hansrajmodelschool.org/",
+  },
     {
     institution: "Hansraj Model School, Delhi (C.B.S.E.)",
     degree: "Class X",
@@ -42,7 +44,7 @@ export const academics: AcademicEntry[] = [
     location: "India",
     highlights: [
       "Achieved the award for academic excellence for 5 consecutive years in school from class 6th to 12th.",
-    ]
+    ],
     institutionUrl: "http://hansrajmodelschool.org/",
   }
 ];
