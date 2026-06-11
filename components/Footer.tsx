@@ -5,8 +5,12 @@ import { Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site";
 import {
-  IconTwitter, IconLinkedin, IconInstagram,
-  IconMedium, IconSubstack, IconTopmate
+  IconTwitter,
+  IconLinkedin,
+  IconInstagram,
+  IconMedium,
+  IconSubstack,
+  IconTopmate,
 } from "@/components/SocialIcons";
 
 const navLinks = [
@@ -20,27 +24,28 @@ const navLinks = [
   { href: "/movies", label: "Movies" },
 ];
 
-function usePageViews() {
-  const [views, setViews] = useState<string | null>(null);
-  useEffect(() => {
-    fetch("/api/pageviews")
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.views) {
-          const n = Number(d.views);
-          if (n >= 1000000) setViews(`${(n / 1000000).toFixed(1)}M`);
-          else if (n >= 1000) setViews(`${(n / 1000).toFixed(1)}K`);
-          else setViews(String(n));
-        }
-      })
-      .catch(() => setViews(null));
-  }, []);
-  return views;
-}
+const statusMessages = [
+  "Exploring & Experimenting",
+  "Following Curiosity",
+  "Learning Something New",
+  "Following Curiosity",
+  "Connecting Dots",
+  "Exploring New Ideas",
+  "Reading, Writing, Repeating",
+];
 
 export default function Footer() {
-  const views = usePageViews();
   const s = siteConfig.socials;
+
+  const [statusIndex, setStatusIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStatusIndex((prev) => (prev + 1) % statusMessages.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const connectLinks = [
     { label: "X / Twitter", href: s.twitter, Icon: IconTwitter },
@@ -60,10 +65,14 @@ export default function Footer() {
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
           {/* Navigate */}
           <div className="flex flex-col gap-4">
-            <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--muted-foreground)" }}>
+            <p
+              className="text-xs font-semibold uppercase tracking-widest"
+              style={{ color: "var(--muted-foreground)" }}
+            >
               Navigate
             </p>
-            <nav className="flex flex-wrap gap-x-6 gap-y-1.5">
+
+            <nav className="grid grid-cols-4 gap-x-6 gap-y-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -79,9 +88,13 @@ export default function Footer() {
 
           {/* Connect */}
           <div className="flex flex-col gap-4">
-            <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--muted-foreground)" }}>
+            <p
+              className="text-xs font-semibold uppercase tracking-widest"
+              style={{ color: "var(--muted-foreground)" }}
+            >
               Connect
             </p>
+
             <div className="flex flex-wrap gap-2">
               {connectLinks.map(({ label, href, Icon }) => (
                 <a
@@ -91,17 +104,24 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   aria-label={label}
                   className="flex items-center justify-center w-9 h-9 rounded-lg border transition-colors hover:bg-[--muted] hover:text-[--text-primary]"
-                  style={{ borderColor: "var(--border)", color: "var(--muted-foreground)" }}
+                  style={{
+                    borderColor: "var(--border)",
+                    color: "var(--muted-foreground)",
+                  }}
                 >
                   <Icon size={15} />
                 </a>
               ))}
+
               {s.email && (
                 <a
                   href={s.email}
                   aria-label="Email"
                   className="flex items-center justify-center w-9 h-9 rounded-lg border transition-colors hover:bg-[--muted] hover:text-[--text-primary]"
-                  style={{ borderColor: "var(--border)", color: "var(--muted-foreground)" }}
+                  style={{
+                    borderColor: "var(--border)",
+                    color: "var(--muted-foreground)",
+                  }}
                 >
                   <Mail size={15} />
                 </a>
@@ -113,12 +133,21 @@ export default function Footer() {
         {/* Bottom bar */}
         <div
           className="mt-10 pt-6 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs"
-          style={{ borderColor: "var(--border)", color: "var(--muted-foreground)" }}
+          style={{
+            borderColor: "var(--border)",
+            color: "var(--muted-foreground)",
+          }}
         >
-          <span>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</span>
-          <span className="flex items-center gap-1.5">
+          <span>
+            © {new Date().getFullYear()} {siteConfig.name}. All rights
+            reserved.
+          </span>
+
+          <span className="flex items-center gap-2">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-            {views !== null ? <>{views} visitors</> : <>— visitors</>}
+            <span key={statusIndex}>
+              {statusMessages[statusIndex]}
+            </span>
           </span>
         </div>
       </div>
