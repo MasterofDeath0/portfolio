@@ -28,9 +28,7 @@ const statusMessages = [
   "Exploring & Experimenting",
   "Following Curiosity",
   "Learning Something New",
-  "Following Curiosity",
   "Connecting Dots",
-  "Exploring New Ideas",
   "Reading, Writing, Repeating",
 ];
 
