@@ -132,26 +132,50 @@ export function CommandPalette({ open, setOpen }: Props) {
             </Command.Empty>
 
             {/* Navigation */}
-            <Command.Group
-              heading="Navigation"
-              style={{ padding: "0.25rem 0.5rem", fontSize: "0.7rem", letterSpacing: "0.1em", color: "var(--muted-foreground)", textTransform: "uppercase", fontWeight: 600 }}
-            >
-              {navItems.map((item) => (
-                <Command.Item
-                  key={item.href}
-                  onSelect={() => { router.push(item.href); close(); }}
-                  style={{ display: "flex", alignItems: "center", gap: "0.75rem", padding: "0.625rem 0.75rem", borderRadius: "0.75rem", cursor: "pointer", fontSize: "0.875rem", color: "var(--text-primary)", marginTop: "0.125rem" }}
-                  className="cmdk-item"
-                >
-                  <item.icon size={15} style={{ opacity: 0.6, flexShrink: 0 }} />
-                  <div className="flex flex-col flex-1 min-w-0">
-                    <span>{item.label}</span>
-                    <span style={{ color: "var(--muted-foreground)", fontSize: "0.75rem" }}>{item.sub}</span>
-                  </div>
-                  <Kbd>{item.shortcut}</Kbd>
-                </Command.Item>
-              ))}
-            </Command.Group>
+<Command.Group
+  heading="navigation"
+  style={{
+    padding: "0.25rem 0.5rem",
+    fontSize: "0.7rem",
+    letterSpacing: "0.1em",
+    color: "var(--muted-foreground)",
+    textTransform: "none",
+    fontWeight: 600,
+  }}
+>
+  {navItems.map((item) => (
+    <Command.Item
+      key={item.href}
+      onSelect={() => {
+        router.push(item.href);
+        close();
+      }}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "0.75rem",
+        padding: "0.625rem 0.75rem",
+        borderRadius: "0.75rem",
+        cursor: "pointer",
+        fontSize: "0.875rem",
+        color: "var(--text-primary)",
+        marginTop: "0.125rem",
+      }}
+      className="cmdk-item"
+    >
+      <item.icon
+        size={15}
+        style={{ opacity: 0.6, flexShrink: 0 }}
+      />
+
+      <span className="flex-1">
+        {item.label}
+      </span>
+
+      <Kbd>{item.shortcut}</Kbd>
+    </Command.Item>
+  ))}
+</Command.Group>
 
             <Command.Separator style={{ height: "1px", background: "var(--border)", margin: "0.5rem" }} />
 
