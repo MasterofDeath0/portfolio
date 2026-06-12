@@ -56,7 +56,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="border-t mt-20"
+      className="border-t mt-10"
       style={{ borderColor: "var(--border)" }}
     >
       <div className="container mx-auto max-w-2xl px-4 py-12">
