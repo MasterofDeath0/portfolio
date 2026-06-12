@@ -72,7 +72,7 @@ export const metadata: Metadata = {
       {
         url: "/og-image.png",
         width: 1200,
-        height: 6o0,
+        height: 600,
         alt: "Sanyam Aggarwal Portfolio",
       },
     ],
