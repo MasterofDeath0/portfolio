@@ -22,20 +22,68 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+// export const metadata: Metadata = {
+//   title: `${siteConfig.name} — Portfolio`,
+//   description: siteConfig.seoDescription,
+//   openGraph: {
+//     title: siteConfig.name,
+//     description: siteConfig.seoDescription,
+//     url: siteConfig.website,
+//     siteName: siteConfig.name,
+//     type: "website",
+//   },
+//   twitter: {
+//     card: "summary_large_image",
+//     title: siteConfig.name,
+//     description: siteConfig.seoDescription,
+//   },
+// };
+
 export const metadata: Metadata = {
-  title: `${siteConfig.name} — Portfolio`,
-  description: siteConfig.description,
-  openGraph: {
-    title: siteConfig.name,
-    description: siteConfig.description,
-    url: siteConfig.website,
-    siteName: siteConfig.name,
-    type: "website",
+  title: {
+    default: "Sanyam Aggarwal",
+    template: "%s | Sanyam Aggarwal",
   },
+
+  description: siteConfig.seoDescription,
+
+  authors: [
+    {
+      name: "Sanyam Aggarwal",
+    },
+  ],
+
+  metadataBase: new URL("https://aggarwalsanyam.vercel.app"),
+
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
+
+  openGraph: {
+    title: "Sanyam Aggarwal",
+    description: siteConfig.seoDescription,
+    url: "https://aggarwalsanyam.vercel.app",
+    siteName: "Sanyam Aggarwal",
+    type: "website",
+
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 6o0,
+        alt: "Sanyam Aggarwal Portfolio",
+      },
+    ],
+  },
+
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
+    title: "Sanyam Aggarwal",
+    description: siteConfig.seoDescription,
+
+    images: ["/og-image.png"],
   },
 };
 
