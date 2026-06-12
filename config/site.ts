@@ -7,6 +7,7 @@ export const siteConfig = {
   avatarDark: "/assets/avatar-dark.png",
   avatarLight: "/assets/avatar-light.png",
   description: "I'm a curious mind with many interests and a relentless drive to keep growing.",
+  seoDescription: "Life is this. I like this.",
 
   googleAnalyticsId: "",
   socials: {
