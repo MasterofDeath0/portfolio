@@ -15,7 +15,7 @@ import {
   IconMedium, IconSubstack, IconTopmate
 } from "@/components/SocialIcons";
 // import { formatDate } from "@/lib/utils";
-import { blogs } from "@/config/blogs";
+import { blogs } from "@/config/blog";
 
 const socialLinks = [
   { label: "X",         href: siteConfig.socials.twitter,   Icon: IconTwitter  },
