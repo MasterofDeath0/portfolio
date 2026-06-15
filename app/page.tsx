@@ -9,12 +9,13 @@ import HeroEmailCopy from "@/components/HeroEmailCopy";
 import ExperienceItem from "@/components/ExperienceItem";
 import QuoteBlock from "@/components/QuoteBlock";
 import PageTransition from "@/components/PageTransition";
-import { getBlogPosts } from "@/lib/blog";
+// import { getBlogPosts } from "@/lib/blog";
 import {
   IconTwitter, IconLinkedin, IconInstagram,
   IconMedium, IconSubstack, IconTopmate
 } from "@/components/SocialIcons";
-import { formatDate } from "@/lib/utils";
+// import { formatDate } from "@/lib/utils";
+import { blogs } from "@/config/blogs";
 
 const socialLinks = [
   { label: "X",         href: siteConfig.socials.twitter,   Icon: IconTwitter  },
@@ -25,9 +26,15 @@ const socialLinks = [
   { label: "Topmate",   href: siteConfig.socials.topmate,   Icon: IconTopmate  },
 ].filter((l) => l.href);
 
+// export default async function Home() {
+//   const posts = await getBlogPosts();
+//   const latestPosts = posts.slice(0, 3);
+//   const previewExperiences = experiences.slice(0, 3);
+
 export default async function Home() {
-  const posts = await getBlogPosts();
-  const latestPosts = posts.slice(0, 3);
+  const latestPosts = [...blogs]
+    .sort((a, b) => b.id - a.id)
+    .slice(0, 3);
   const previewExperiences = experiences.slice(0, 3);
 
   return (
@@ -108,7 +115,7 @@ export default async function Home() {
         </div>
 
         {/* Blog */}
-        <div className="container mx-auto max-w-2xl px-4">
+        {/* <div className="container mx-auto max-w-2xl px-4">
           <section className="space-y-4">
             <h2 className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>
               Blog
@@ -161,7 +168,91 @@ export default async function Home() {
               <ShowAllButton href="/blog" label="Show all blogs" />
             </div>
           </section>
-        </div>
+        </div> */}
+
+        {/* Blog */}
+<div className="container mx-auto max-w-2xl px-4">
+  <section className="space-y-4">
+    <h2
+      className="text-xl font-bold"
+      style={{ color: "var(--text-primary)" }}
+    >
+      Blog
+    </h2>
+
+    <div>
+      {latestPosts.length === 0 ? (
+        <p
+          className="text-sm"
+          style={{ color: "var(--muted-foreground)" }}
+        >
+          No posts yet.
+        </p>
+      ) : (
+        latestPosts.map((post) => (
+          <a
+            key={post.id}
+            href={post.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block py-3.5 group"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div className="space-y-0.5 flex-1 min-w-0">
+                <p
+                  className="text-sm font-medium transition-opacity group-hover:opacity-70"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  {post.title}
+                </p>
+
+                {post.summary && (
+                  <p
+                    className="text-xs line-clamp-1"
+                    style={{ color: "var(--muted-foreground)" }}
+                  >
+                    {post.summary}
+                  </p>
+                )}
+
+                <div className="flex flex-wrap gap-1 pt-1">
+                  {post.tags.slice(0, 2).map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-[10px] px-1.5 py-0.5 rounded border"
+                      style={{
+                        borderColor: "var(--border)",
+                        color: "var(--text-dim)",
+                        background: "var(--muted)",
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <span
+                className="text-xs shrink-0 transition-colors group-hover:text-[--text-primary]"
+                style={{ color: "var(--muted-foreground)" }}
+              >
+                {post.source === "Medium"
+                  ? "Read More →"
+                  : post.source === "Substack"
+                  ? "Read More →"
+                  : "Read More →"}
+              </span>
+            </div>
+          </a>
+        ))
+      )}
+    </div>
+
+    <div className="flex justify-center pt-1">
+      <ShowAllButton href="/blog" label="Show all blogs" />
+    </div>
+  </section>
+</div>
 
         {/* Quote — random on every refresh */}
         <div className="container mx-auto max-w-2xl px-4">
