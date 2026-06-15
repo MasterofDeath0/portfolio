@@ -10,10 +10,11 @@ import { CommandPalette } from "./CommandPalette";
 const moreLinks = [
   { href: "/projects", label: "Projects" },
   { href: "/academics", label: "Academics" },
+  { href: "/achievements", label: "Achievements" },
   { href: "/books", label: "Books" },
   { href: "/movies", label: "Movies" },
   { href: "/gears", label: "Gears" },
-  { href: "/achievements", label: "Achievements" },
+  // { href: "/achievements", label: "Achievements" },
 ];
 
 const globalNavShortcuts: Record<string, string> = {
