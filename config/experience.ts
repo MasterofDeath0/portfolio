@@ -29,6 +29,7 @@ export const experiences: Experience[] = [
     ],
   },
   {
+    id: 2,
     company: "Tata 1mg",
     role: "Analyst",
     period: "Jul 2024 – May 2025",
@@ -42,6 +43,7 @@ export const experiences: Experience[] = [
     ],
   },
    {
+    id: 3,
     company: "Tata 1mg",
     role: "Analyst Intern",
     period: "Jan 2024 – Jun 2024",
@@ -55,6 +57,7 @@ export const experiences: Experience[] = [
     ],
   },
   {
+    id: 4,
     company: "The Product Folks",
     role: "Growth & Product Intern",
     period: "Jul 2022 – Apr 2023",
@@ -68,6 +71,7 @@ export const experiences: Experience[] = [
     ],
   },
   {
+    id: 5,
     company: "Loop Subscriptions",
     role: "Research Analyst Intern",
     period: "Sep 2022 – Dec 2022",
@@ -81,6 +85,7 @@ export const experiences: Experience[] = [
     ],
   },
   {
+    id: 6,
     company: "SelectricGo",
     role: "Founding Member & Product Manager",
     period: "Sep 2021 – Jun 2022",
