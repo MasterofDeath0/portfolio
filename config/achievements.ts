@@ -9,13 +9,21 @@ export interface Achievement {
 
 export const achievements: Achievement[] = [
   {
+  title: "Founder — Covid Leads",
+  issuer: "Community Initiative",
+  date: "2021",
+  description: "Led a volunteer network of 250+ contributors to provide verified Covid-19 resources and emergency support during the pandemic.",
+  category: "leadership",
+},
+  
+  {
   title: "AIR 5 — National Entrepreneurship Challenge",
   issuer: "E-Summit 2023, IIT Bombay",
   date: "2023",
   description: "Secured All India Rank 5 among 800+ teams in one of India's largest entrepreneurship competitions.",
   category: "award",
 },
-
+  
 {
   title: "Top 10 — The Corporate Duel",
   issuer: "E-Summit 2023, IIT Bombay",
@@ -55,13 +63,5 @@ export const achievements: Achievement[] = [
   date: "2018",
   description: "Awarded Gold Medal for outstanding performance in a national-level Hindi language competition.",
   category: "award",
-},
-
-{
-  title: "Founder — Covid Leads",
-  issuer: "Community Initiative",
-  date: "2021",
-  description: "Led a volunteer network of 250+ contributors to provide verified Covid-19 resources and emergency support during the pandemic.",
-  category: "leadership",
 },
 ];
