@@ -14,7 +14,6 @@ const moreLinks = [
   { href: "/books", label: "Books" },
   { href: "/movies", label: "Movies" },
   { href: "/gears", label: "Gears" },
-  // { href: "/achievements", label: "Achievements" },
 ];
 
 const globalNavShortcuts: Record<string, string> = {
