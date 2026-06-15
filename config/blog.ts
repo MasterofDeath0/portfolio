@@ -5,7 +5,7 @@ export const blogs = [
     summary: "When words failed, sages sang. The hidden purpose behind thousands of hymns.",
     tags: ["Spirituality","Philosophy","Psychology","Mythology"],
     source: "Substack",
-    link: "https://supersanyam.medium.com/guesstimate-estimate-the-number-of-hairs-on-your-scalp-cb74a7236713",
+    link: "https://supersanyam.substack.com/p/why-sages-wrote-thousands-of-hymns?r=ccx8w",
   },
   {
     id: 18,
