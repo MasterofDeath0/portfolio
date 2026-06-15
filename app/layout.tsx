@@ -55,11 +55,11 @@ export const metadata: Metadata = {
 
   metadataBase: new URL("https://aggarwalsanyam.vercel.app"),
 
-  icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
-  },
+  // icons: {
+  //   icon: "/favicon.png",
+  //   shortcut: "/favicon.png",
+  //   apple: "/favicon.png",
+  // },
 
   openGraph: {
     title: "Sanyam Aggarwal",
