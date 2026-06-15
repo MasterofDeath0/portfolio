@@ -286,9 +286,9 @@ export default function BlogPage() {
                     style={{ color: "var(--muted-foreground)" }}
                   >
                     {blog.source === "Medium"
-                      ? "Read on Medium →"
+                      ? "Read More →"
                       : blog.source === "Substack"
-                      ? "Read on Substack →"
+                      ? "Read More →"
                       : "Read more →"}
                   </span>
                 </div>
