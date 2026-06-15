@@ -4,7 +4,7 @@ export interface Achievement {
   date: string;
   description?: string;
   link?: string;
-  category?: "award" | "certification" | "hackathon" | "recognition" | "other";
+  category?: "award" | "certification" | "hackathon" | "recognition" | "other" | "leadership";
 }
 
 export const achievements: Achievement[] = [
