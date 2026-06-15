@@ -35,11 +35,10 @@ const navItems = [
   { label: "Blog",         href: "/blog",         icon: BookOpen,      shortcut: "B" },
   { label: "Projects",     href: "/projects",     icon: FolderOpen,    shortcut: "P" },
   { label: "Academics",    href: "/academics",    icon: GraduationCap, shortcut: "C" },
-  { label: "Achievements", href: "/achievements", icon: Trophy,        shortcut: "V" }
+  { label: "Achievements", href: "/achievements", icon: Trophy,        shortcut: "V" },
   { label: "Books",        href: "/books",        icon: Book,          shortcut: "K" },
   { label: "Movies",       href: "/movies",       icon: Film,          shortcut: "M" },
   { label: "Gears",        href: "/gears",        icon: Settings,      shortcut: "G" },
-  // { label: "Achievements", href: "/achievements", icon: Trophy,        shortcut: "V" },
 ];
 
 // Kbd badge component
