@@ -4,7 +4,7 @@ export const blogs = [
     title: "Why Sages Wrote Thousands of Hymns for a Reality Beyond Language",
     summary: "When words failed, sages sang. The hidden purpose behind thousands of hymns.",
     tags: ["Spirituality","Philosophy","Psychology","Mythology"],
-    source: "Medium",
+    source: "Substack",
     link: "https://supersanyam.medium.com/guesstimate-estimate-the-number-of-hairs-on-your-scalp-cb74a7236713",
   },
   {
