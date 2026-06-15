@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { achievements } from "@/config/achievements";
 import PageTransition from "@/components/PageTransition";
-import { ExternalLink, Trophy, Award, Zap, Star, Medal } from "lucide-react";
+import { ExternalLink, Trophy, Award, Zap, Star, Medal, Users } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Achievements — Sanyam Aggarwal",
@@ -14,6 +14,7 @@ const categoryIcon = {
   hackathon: Zap,
   recognition: Star,
   other: Award,
+  leadership: Users,
 };
 
 export default function AchievementsPage() {
