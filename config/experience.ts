@@ -1,6 +1,6 @@
 export interface Experience {
   id: number,
-  company: string;
+  company?: string;
   role: string;
   period: string;
   location: string;
@@ -84,9 +84,9 @@ export const experiences: Experience[] = [
     company: "SelectricGo",
     role: "Founding Member & Product Manager",
     period: "Sep 2021 – Jun 2022",
-    location: "Gurugram, Haryana",
+    location: "Delhi",
     type: "Startup",
-    companyUrl: "https://www.1mg.com/",
+    // companyUrl: "",
     // tech: ["React", "Tailwind CSS", "Next.js"],
     points: [
       "My first taste of building from 0 to 1, long before I knew I'd end up in product.",
