@@ -66,87 +66,63 @@ export const metadata: Metadata = {
 
 export default function BooksPage() {
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-10">
-      {/* Header */}
-      <div className="mb-12">
+    <div className="container mx-auto max-w-2xl px-4 py-10 space-y-8">
+      {/* Header - unchanged */}
+      <div className="space-y-1">
         <h1
-          className="text-4xl font-bold mb-2"
+          className="text-lg font-semibold"
           style={{ color: "var(--text-primary)" }}
         >
           Books
         </h1>
 
         <p
-          className="text-base"
+          className="text-sm"
           style={{ color: "var(--muted-foreground)" }}
         >
-          A collection of books that have influenced my thinking and growth.
+          What I've been reading. Always updating.
         </p>
       </div>
 
       {/* Categories */}
-      <div className="space-y-14">
-        {books.map((category) => (
-          <section key={category.category}>
-            {/* Category Title */}
-            <div className="flex items-center gap-3 mb-6">
+      {books.map((cat) => (
+        <div key={cat.category} className="space-y-3">
+          {/* Category title - unchanged */}
+          <h2
+            className="text-xs font-semibold uppercase tracking-widest"
+            style={{ color: "var(--muted-foreground)" }}
+          >
+            {cat.category}
+          </h2>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {cat.items.map((book) => (
               <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center border"
+                key={book.title}
+                className="rounded-lg border px-4 py-3 transition-colors hover:bg-[--muted]"
                 style={{
                   borderColor: "var(--border)",
-                  background: "var(--muted)",
                 }}
               >
-                📚
-              </div>
-
-              <h2
-                className="text-3xl font-semibold"
-                style={{ color: "var(--text-primary)" }}
-              >
-                {category.category}
-              </h2>
-            </div>
-
-            {/* Book Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {category.items.map((book) => (
-                <div
-                  key={book.title}
-                  className="rounded-2xl border p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
-                  style={{
-                    borderColor: "var(--border)",
-                    background: "var(--surface)",
-                  }}
+                <p
+                  className="text-sm"
+                  style={{ color: "var(--text-primary)" }}
                 >
-                  <h3
-                    className="text-xl font-medium mb-2"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    {book.title}
-                  </h3>
+                  {book.title}
+                </p>
 
-                  <p
-                    className="text-sm"
-                    style={{ color: "var(--muted-foreground)" }}
-                  >
-                    {book.author}
-                  </p>
-
-                  {book.year && (
-                    <p
-                      className="text-xs mt-4"
-                      style={{ color: "var(--text-dim)" }}
-                    >
-                      {book.year}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
+                <p
+                  className="text-xs mt-0.5"
+                  style={{ color: "var(--muted-foreground)" }}
+                >
+                  {book.author}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
