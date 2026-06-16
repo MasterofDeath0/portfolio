@@ -11,29 +11,58 @@ export interface BookCategory {
 
 export const books: BookCategory[] = [
   {
-    category: "Tech & Building",
+    category: "Contemporary Romance",
     items: [
-      { title: "Zero to One", author: "Peter Thiel", year: 2024 },
-      { title: "The Lean Startup", author: "Eric Ries", year: 2023 },
-      { title: "The Pragmatic Programmer", author: "David Thomas & Andrew Hunt", year: 2024 },
-      { title: "Clean Code", author: "Robert C. Martin", year: 2023 },
+      { title: "I Too Had a Love Story", author: "Ravinder Singh" },
+      { title: "Can Love Happen Twice?", author: "Ravinder Singh" },
+      { title: "The Boy Who Loved", author: "Durjoy Datta" },
+      { title: "The Boy with a Broken Heart", author: "Durjoy Datta" },
+      { title: "A Second Chance", author: "Sudeep Nagarkar" },
+      { title: "The Secrets We Keep", author: "Sudeep Nagarkar" },
+      { title: "The Girl of My Dreams", author: "Durjoy Datta" },
+      { title: "Of Course I Love You... Till I Find Someone Better", author: "Durjoy Datta" },
+      { title: "Wish I Could Tell You", author: "Durjoy Datta" },
+      { title: "When Love Came Calling", author: "Preeti Shenoy" },
+      { title: "It Started with a Friend Request", author: "Sudeep Nagarkar" },
+      { title: "You Only Live Once", author: "Stuti Changle" },
+      { title: "This Is Not Your Story", author: "Savi Sharma" },
+      { title: "Everyone Has a Story (All Parts)", author: "Savi Sharma" },
+      { title: "Stories We Never Tell", author: "Savi Sharma" },
+      { title: "Something I Never Told You", author: "Shravya Bhinder" },
+      { title: "Something I'm Waiting to Tell You", author: "Shravya Bhinder" },
     ],
   },
+
   {
-    category: "Mindset & Growth",
+    category: "Contemporary Fiction",
     items: [
-      { title: "Atomic Habits", author: "James Clear", year: 2024 },
-      { title: "Deep Work", author: "Cal Newport", year: 2024 },
-      { title: "The Psychology of Money", author: "Morgan Housel", year: 2023 },
-      { title: "Thinking, Fast and Slow", author: "Daniel Kahneman", year: 2023 },
+      // { title: "You Only Live Once", author: "Stuti Changle" },
+      // { title: "This Is Not Your Story", author: "Savi Sharma" },
+      { title: "The Answer Is No", author: "Fredrik Backman" },
     ],
   },
+
   {
-    category: "Philosophy",
+    category: "Philosophy & Self Discovery",
     items: [
-      { title: "Meditations", author: "Marcus Aurelius", year: 2024 },
-      { title: "Bhagavad Gita", author: "Eknath Easwaran (trans.)", year: 2024 },
-      { title: "Man's Search for Meaning", author: "Viktor E. Frankl", year: 2023 },
+      { title: "The Alchemist", author: "Paulo Coelho" },
+    ],
+  },
+
+  {
+    category: "Mythology & Spiritual Fiction",
+    items: [
+      { title: "The Immortals of Meluha", author: "Amish Tripathi" },
+      { title: "The Hidden Hindu (All Parts)", author: "Akshat Gupta" },
+      { title: "Aghori: An Untold Story", author: "Mayur Kalbag" },
+    ],
+  },
+
+  {
+    category: "Contemporary Hindi Fiction",
+    items: [
+      { title: "October Junction", author: "Divya Prakash Dubey" },
+      { title: "Musafir Cafe", author: "Divya Prakash Dubey" },
     ],
   },
 ];
