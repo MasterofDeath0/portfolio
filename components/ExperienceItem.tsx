@@ -72,23 +72,9 @@ export default function ExperienceItem({ exp }: { exp: Experience }) {
           >
             <div className="pb-4 border-t pt-3" style={{ borderColor: "var(--border)" }}>
               {/* Tech stack */}
-              {exp.tech?.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {exp.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="text-xs px-2 py-0.5 rounded border"
-                      style={{
-                        borderColor: "var(--border)",
-                        color: "var(--muted-foreground)",
-                        background: "var(--muted)",
-                      }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              )}
+
+
+              
               {/* Points */}
               <ul className="space-y-1.5">
                 {exp.points.map((point, i) => (
