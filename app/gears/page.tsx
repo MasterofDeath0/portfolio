@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { hardware, software, extensions } from "@/config/gears";
+import { gadgets, software, extensions } from "@/config/gears";
 import { ExternalLink } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Gears — Sanyam Aggarwal",
-  description: "Hardware, software, and tools I use.",
+  description: "Gadgets I use to get my work done",
 };
 
 interface GearItem {
@@ -56,11 +56,11 @@ export default function GearsPage() {
           Gears
         </h1>
         <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
-          Hardware, software, and tools that power my workflow.
+          Gadgets I use to get my work done.
         </p>
       </div>
 
-      <GearSection title="Hardware" items={hardware} />
+      <GearSection title="Gadgets" items={gadgets} />
       <GearSection title="Software" items={software} />
       <GearSection title="VS Code Extensions" items={extensions} />
     </div>
