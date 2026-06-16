@@ -114,7 +114,8 @@ export default function Oneko() {
       frameCount += 1;
 
       // forceSleep: always idle, never move
-      if (forceSleep) { idle(); return; }
+      // if (forceSleep) { idle(); return; }
+      if (forceSleep) { idleAnimation = "sleeping"; idle(); return; }
 
       const diffX = nekoPosX - mousePosX;
       const diffY = nekoPosY - mousePosY;
@@ -161,10 +162,16 @@ export default function Oneko() {
     const onTouchMove = (e: TouchEvent) => {
       if (e.touches.length > 0) { mousePosX = e.touches[0].clientX; mousePosY = e.touches[0].clientY; }
     };
+    // const onTouchStart = (e: TouchEvent) => {
+    //   if (e.touches.length > 0) {
+    //     mousePosX = e.touches[0].clientX; mousePosY = e.touches[0].clientY;
+    //     if (forceSleep) { forceSleep = false; localStorage.setItem("oneko:forceSleep", "false"); resetIdleAnimation(); }
+    //   }
+    // };
     const onTouchStart = (e: TouchEvent) => {
       if (e.touches.length > 0) {
-        mousePosX = e.touches[0].clientX; mousePosY = e.touches[0].clientY;
-        if (forceSleep) { forceSleep = false; localStorage.setItem("oneko:forceSleep", "false"); resetIdleAnimation(); }
+        mousePosX = e.touches[0].clientX;
+        mousePosY = e.touches[0].clientY;
       }
     };
 
@@ -174,22 +181,46 @@ export default function Oneko() {
       localStorage.setItem("oneko:variant", JSON.stringify(variant));
       if (nekoEl) nekoEl.style.backgroundImage = `url("/oneko/oneko-${variant}.gif")`;
     };
+    // const onToggleSleep = () => {
+    //   forceSleep = !forceSleep;
+    //   localStorage.setItem("oneko:forceSleep", JSON.stringify(forceSleep));
+    //   if (!forceSleep) { idleTime = 0; resetIdleAnimation(); }
+    // };
     const onToggleSleep = () => {
       forceSleep = !forceSleep;
       localStorage.setItem("oneko:forceSleep", JSON.stringify(forceSleep));
-      if (!forceSleep) { idleTime = 0; resetIdleAnimation(); }
+    
+      if (forceSleep) {
+        idleAnimation = "sleeping";
+        idleAnimationFrame = 0;
+      } else {
+        idleTime = 0;
+        resetIdleAnimation();
+      }
     };
 
     // Double-click on neko toggles sleep
     let lastClickTime = 0;
     const onNekoClick = () => {
       const now = Date.now();
+      // if (now - lastClickTime < 400) {
+      //   // double-click
+      //   forceSleep = !forceSleep;
+      //   localStorage.setItem("oneko:forceSleep", JSON.stringify(forceSleep));
+      //   if (!forceSleep) { idleTime = 0; resetIdleAnimation(); }
+      // }
       if (now - lastClickTime < 400) {
-        // double-click
-        forceSleep = !forceSleep;
-        localStorage.setItem("oneko:forceSleep", JSON.stringify(forceSleep));
-        if (!forceSleep) { idleTime = 0; resetIdleAnimation(); }
-      }
+  forceSleep = !forceSleep;
+  localStorage.setItem("oneko:forceSleep", JSON.stringify(forceSleep));
+
+  if (forceSleep) {
+    idleAnimation = "sleeping";
+    idleAnimationFrame = 0;
+  } else {
+    idleTime = 0;
+    resetIdleAnimation();
+  }
+}
       lastClickTime = now;
     };
     if (nekoEl) nekoEl.addEventListener("click", onNekoClick);
@@ -230,3 +261,6 @@ export default function Oneko() {
     />
   );
 }
+
+
+
