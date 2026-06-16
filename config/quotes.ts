@@ -17,8 +17,8 @@ export const quotes: Quote[] = [
     author: "Steve Jobs",
   },
   {
-    text: "The pain doesn't kill me, it only makes me stronger.",
-    author: "Sung Jin-Woo, Solo Leveling",
+    text: "śanaiḥ panthāḥ śanaiḥ kanthā śanaiḥ parvatamastake śanaiḥ vidyā śanaiḥ vittaṃ pañcaitāni śanaiḥ śanaiḥ",
+    author: "Unknown",
   },
   {
     text: "Done is better than perfect.",
