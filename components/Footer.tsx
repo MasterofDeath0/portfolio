@@ -11,6 +11,8 @@ import {
   IconMedium,
   IconSubstack,
   IconTopmate,
+  IconPen,
+  IconCamera,
 } from "@/components/SocialIcons";
 
 const navLinks = [
@@ -52,6 +54,7 @@ export default function Footer() {
     { label: "Medium", href: s.medium, Icon: IconMedium },
     { label: "Substack", href: s.substack, Icon: IconSubstack },
     { label: "Topmate", href: s.topmate, Icon: IconTopmate },
+    { label: "Writing", href: s.instagram2, Icon: IconPen },
   ].filter((l) => l.href);
 
   return (
