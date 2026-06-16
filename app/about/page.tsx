@@ -34,17 +34,68 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="space-y-3 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-          <p>
-            Hey, I&apos;m Sanyam — an engineer, builder, and creator based in India. I love working on products that sit at the intersection of design and engineering.
-          </p>
-          <p>
-            I&apos;ve spent the last few years building software used by real people — from early-stage startups to side projects that scratched my own itch. I believe the best software is invisible: it just works, and it feels right.
-          </p>
-          <p>
-            When I&apos;m not coding, I&apos;m reading, writing, or obsessing over fragrances (yes, really). I document my thinking on my blog and occasionally make videos.
-          </p>
-        </div>
+        <div
+  className="space-y-4 text-sm leading-relaxed"
+  style={{ color: "var(--text-secondary)" }}
+>
+  <p>
+    Hey, I'm Sanyam Aggarwal.
+  </p>
+
+  <p>
+    <em>
+      "A jack of all trades is a master of none, but oftentimes better than a
+      master of one."
+    </em>
+  </p>
+
+  <p>
+    It's a quote that has stayed with me for years. I've always been fascinated
+    by people who refuse to fit neatly into a single box, the kind of people who
+    find beauty in numbers and narratives, logic and literature, data and
+    dreams. I suppose that is why I have spent my life wandering across
+    disciplines, collecting stories, ideas, and perspectives along the way.
+  </p>
+
+  <p>
+    At heart, I'm a curious observer of the world. My interests live at the
+    intersection of product, data, analytics, finance, and creativity. I'm
+    fascinated by how great ideas are built, how people make decisions, and how
+    thoughtful products can shape everyday experiences. Guided by the belief
+    that <em>"where there's a problem lies a great product,"</em> I enjoy
+    breaking down complex problems to first principles and finding simple,
+    meaningful solutions. I find myself constantly asking why things work the
+    way they do.
+  </p>
+
+  <p>
+    Beyond that, I'm a reader, writer, and lifelong learner. I read to see the
+    world and write to see myself. You'll often find me immersed in novels,
+    exploring mythology and psychology, writing stories, poems and reflections,
+    painting, playing badminton, or diving into the worlds of fragrances and
+    horology.
+  </p>
+
+  <p>
+    More than achievements, I value curiosity. More than expertise, I value
+    learning. I believe every person carries a universe of stories, every
+    problem hides an opportunity, and every experience leaves behind a lesson
+    waiting to be discovered.
+  </p>
+
+  <p>
+    This corner of the internet is a reflection of those pursuits, a collection
+    of ideas, creations, questions, and observations gathered through a lifelong
+    journey of exploration.
+  </p>
+
+  <p
+    className="italic"
+    style={{ color: "var(--text-primary)" }}
+  >
+    Still learning. Still wondering. Still becoming.
+  </p>
+</div>
 
         {/* Social icons */}
         <div className="flex flex-wrap items-center gap-2 pt-1">
