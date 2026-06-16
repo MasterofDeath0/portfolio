@@ -13,9 +13,9 @@ export const gadgets: GearItem[] = [
 ];
 
 export const software: GearItem[] = [
-  // { name: "VS Code / Cursor", link: "https://cursor.sh" },
-  // { name: "Warp Terminal", link: "https://warp.dev" },
-  // { name: "Arc Browser", link: "https://arc.net" },
+  { name: "Spotify Premium", link: "https://cursor.sh" },
+  { name: "Youtube Premium", link: "https://warp.dev" },
+  { name: "TickTick", link: "https://arc.net" },
   // { name: "Figma", link: "https://figma.com" },
   // { name: "Notion", link: "https://notion.so" },
   // { name: "Linear", link: "https://linear.app" },
