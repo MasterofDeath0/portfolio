@@ -135,10 +135,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
+        {/* className="mt-10 pt-6 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs" */}
         <div
-          {/* className="mt-10 pt-6 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs"
-          */}
-        className="mt-6 pt-4 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs"
+           className="mt-6 pt-4 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs"
           style={{
             borderColor: "var(--border)",
             color: "var(--muted-foreground)",
