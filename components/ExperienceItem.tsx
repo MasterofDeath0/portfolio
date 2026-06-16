@@ -70,7 +70,8 @@ export default function ExperienceItem({ exp }: { exp: Experience }) {
             transition={{ duration: 0.2, ease: "easeInOut" }}
             style={{ overflow: "hidden" }}
           >
-            <div className="pb-4 border-t pt-3" style={{ borderColor: "var(--border)" }}>
+            <div className="pb-4 border-t pt-1" 
+              style={{ borderColor: "var(--border)" }}>
               {/* Tech stack */}
 
 
