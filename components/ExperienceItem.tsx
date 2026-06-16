@@ -15,7 +15,7 @@ export default function ExperienceItem({ exp }: { exp: Experience }) {
     >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full text-left py-1 flex items-start justify-between gap-4 group"
+        className="w-full text-left py-2 flex items-start justify-between gap-4 group"
       >
         <div className="flex flex-col gap-0.5 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
