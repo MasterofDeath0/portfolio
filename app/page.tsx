@@ -12,7 +12,7 @@ import PageTransition from "@/components/PageTransition";
 // import { getBlogPosts } from "@/lib/blog";
 import {
   IconTwitter, IconLinkedin, IconInstagram,
-  IconMedium, IconSubstack, IconTopmate
+  IconMedium, IconSubstack, IconTopmate,IconPen,IconCamera,
 } from "@/components/SocialIcons";
 // import { formatDate } from "@/lib/utils";
 import { blogs } from "@/config/blog";
@@ -24,6 +24,7 @@ const socialLinks = [
   { label: "Medium",    href: siteConfig.socials.medium,    Icon: IconMedium   },
   { label: "Substack",  href: siteConfig.socials.substack,  Icon: IconSubstack },
   { label: "Topmate",   href: siteConfig.socials.topmate,   Icon: IconTopmate  },
+  { label: "Writing",   href: siteConfig.socials.instagram2,   Icon: IconPen  },
 ].filter((l) => l.href);
 
 // export default async function Home() {
