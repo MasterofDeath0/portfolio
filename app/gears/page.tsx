@@ -59,10 +59,17 @@ export default function GearsPage() {
           Gadgets I use to get my work done.
         </p>
       </div>
-
-      <GearSection title="Gadgets" items={gadgets} />
-      <GearSection title="Software" items={software} />
-      <GearSection title="VS Code Extensions" items={extensions} />
+        {gadgets.length > 0 && (
+          <GearSection title="Gadgets" items={gadgets} />
+        )}
+        
+        {software.length > 0 && (
+          <GearSection title="Software" items={software} />
+        )}
+        
+        {extensions.length > 0 && (
+          <GearSection title="VS Code Extensions" items={extensions} />
+        )}
     </div>
   );
 }
