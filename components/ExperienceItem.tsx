@@ -10,12 +10,12 @@ export default function ExperienceItem({ exp }: { exp: Experience }) {
 
   return (
     <div
-      className="rounded-lg overflow-hidden transition-colors"
-      style={{ background: "transparent" }}
+      className="border-b"
+      style={{ borderColor: "var(--border)" }}
     >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full text-left py-3 flex items-start justify-between gap-4 group"
+        className="w-full text-left py-2 flex items-start justify-between gap-4 group"
       >
         <div className="flex flex-col gap-0.5 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
@@ -31,28 +31,54 @@ export default function ExperienceItem({ exp }: { exp: Experience }) {
                 {exp.company}
               </a>
             ) : (
-              <span className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
+              <span
+                className="text-sm font-semibold"
+                style={{ color: "var(--text-primary)" }}
+              >
                 {exp.company}
               </span>
             )}
+
             {exp.isCurrent && (
               <span
                 className="text-[11px] px-2 py-0.5 rounded-full font-medium flex items-center gap-1"
-                style={{ background: "rgba(34,197,94,0.12)", color: "#22c55e" }}
+                style={{
+                  background: "rgba(34,197,94,0.12)",
+                  color: "#22c55e",
+                }}
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block animate-pulse" />
                 Working
               </span>
             )}
           </div>
-          <span className="text-sm" style={{ color: "var(--text-secondary)" }}>{exp.role}</span>
+
+          <span
+            className="text-sm"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            {exp.role}
+          </span>
         </div>
-        <div className="flex flex-col items-end gap-1 shrink-0">
-          <span className="text-xs" style={{ color: "var(--muted-foreground)" }}>{exp.period}</span>
-          <span className="text-xs" style={{ color: "var(--text-dim)" }}>{exp.location}</span>
+
+        <div className="flex flex-col items-end gap-0.5 shrink-0">
+          <span
+            className="text-xs"
+            style={{ color: "var(--muted-foreground)" }}
+          >
+            {exp.period}
+          </span>
+
+          <span
+            className="text-xs"
+            style={{ color: "var(--text-dim)" }}
+          >
+            {exp.location}
+          </span>
+
           <ChevronDown
             size={14}
-            className="transition-transform mt-1"
+            className="transition-transform mt-0.5"
             style={{
               color: "var(--muted-foreground)",
               transform: open ? "rotate(180deg)" : "rotate(0deg)",
@@ -67,20 +93,21 @@ export default function ExperienceItem({ exp }: { exp: Experience }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
+            transition={{ duration: 0.18, ease: "easeInOut" }}
             style={{ overflow: "hidden" }}
           >
-            <div className="pb-4 border-t pt-1" 
-              style={{ borderColor: "var(--border)" }}>
-              {/* Tech stack */}
-
-
-              
-              {/* Points */}
-              <ul className="space-y-1.5">
+            <div className="pb-2 pt-1">
+              <ul className="space-y-1">
                 {exp.points.map((point, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
-                    <span className="mt-1.5 w-1 h-1 rounded-full shrink-0" style={{ background: "var(--text-dim)" }} />
+                  <li
+                    key={i}
+                    className="flex items-start gap-2 text-sm"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    <span
+                      className="mt-1.5 w-1 h-1 rounded-full shrink-0"
+                      style={{ background: "var(--text-dim)" }}
+                    />
                     {point}
                   </li>
                 ))}
@@ -89,7 +116,6 @@ export default function ExperienceItem({ exp }: { exp: Experience }) {
           </motion.div>
         )}
       </AnimatePresence>
-
     </div>
   );
 }
