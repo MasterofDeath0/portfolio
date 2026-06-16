@@ -83,12 +83,10 @@ export default function SpotifyNowPlaying() {
         className="text-xs hover:underline underline-offset-2 transition-colors hover:text-[--text-primary] min-w-0 flex-1"
         style={{ color: "var(--text-secondary)" }}
       >
-  <span className="block truncate sm:overflow-visible sm:whitespace-normal">
-    {track.title} · {track.artist}
-  </span>
-</a>
+      <span className="block truncate sm:overflow-visible sm:whitespace-normal">
         {track.title} · {track.artist}
-      </a>
+      </span>
+    </a>
     </div>
   );
 }
