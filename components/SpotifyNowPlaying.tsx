@@ -44,7 +44,8 @@ export default function SpotifyNowPlaying() {
 
   return (
     <div
-      className="flex items-center gap-2 text-sm"
+      {/* className="flex items-center gap-2 text-sm" */}
+      className="flex items-center gap-2 text-sm min-w-0"
       style={{ color: "var(--muted-foreground)" }}
     >
       {/* Spotify Logo */}
@@ -68,13 +69,24 @@ export default function SpotifyNowPlaying() {
         —
       </span>
 
-      <a
+      {/* <a
         href={track.songUrl || "#"}
         target="_blank"
         rel="noopener noreferrer"
         className="text-xs hover:underline underline-offset-2 transition-colors hover:text-[--text-primary]"
         style={{ color: "var(--text-secondary)" }}
+      > */}
+      <a
+        href={track.songUrl || "#"}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-xs hover:underline underline-offset-2 transition-colors hover:text-[--text-primary] min-w-0 flex-1"
+        style={{ color: "var(--text-secondary)" }}
       >
+  <span className="block truncate sm:overflow-visible sm:whitespace-normal">
+    {track.title} · {track.artist}
+  </span>
+</a>
         {track.title} · {track.artist}
       </a>
     </div>
