@@ -10,12 +10,12 @@ export default function ExperienceItem({ exp }: { exp: Experience }) {
 
   return (
     <div
-      className="border-b"
-      style={{ borderColor: "var(--border)" }}
+      className="rounded-lg overflow-hidden transition-colors"
+      style={{ background: "transparent" }}
     >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full text-left py-2 flex items-start justify-between gap-4 group"
+        className="w-full text-left py-1 flex items-start justify-between gap-4 group"
       >
         <div className="flex flex-col gap-0.5 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
@@ -61,7 +61,7 @@ export default function ExperienceItem({ exp }: { exp: Experience }) {
           </span>
         </div>
 
-        <div className="flex flex-col items-end gap-0.5 shrink-0">
+        <div className="flex flex-col items-end gap-0 shrink-0">
           <span
             className="text-xs"
             style={{ color: "var(--muted-foreground)" }}
@@ -78,7 +78,7 @@ export default function ExperienceItem({ exp }: { exp: Experience }) {
 
           <ChevronDown
             size={14}
-            className="transition-transform mt-0.5"
+            className="transition-transform mt-0"
             style={{
               color: "var(--muted-foreground)",
               transform: open ? "rotate(180deg)" : "rotate(0deg)",
@@ -93,10 +93,13 @@ export default function ExperienceItem({ exp }: { exp: Experience }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.18, ease: "easeInOut" }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
             style={{ overflow: "hidden" }}
           >
-            <div className="pb-2 pt-1">
+            <div
+              className="pb-2 border-t pt-1"
+              style={{ borderColor: "var(--border)" }}
+            >
               <ul className="space-y-1">
                 {exp.points.map((point, i) => (
                   <li
