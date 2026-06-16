@@ -96,7 +96,7 @@ export default function Footer() {
               Connect
             </p>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="grid grid-cols-4 gap-2">
               {connectLinks.map(({ label, href, Icon }) => (
                 <a
                   key={label}
