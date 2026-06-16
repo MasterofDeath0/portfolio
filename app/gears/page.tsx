@@ -64,11 +64,11 @@ export default function GearsPage() {
         )}
         
         {software.length > 0 && (
-          <GearSection title="Software" items={software} />
+          <GearSection title="Software and Subscriptions" items={software} />
         )}
         
         {extensions.length > 0 && (
-          <GearSection title="VS Code Extensions" items={extensions} />
+          <GearSection title="Extensions" items={extensions} />
         )}
     </div>
   );
