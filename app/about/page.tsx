@@ -4,19 +4,19 @@ import QuoteBlock from "@/components/QuoteBlock";
 import ThemeImage from "@/components/ThemeImage";
 import Link from "next/link";
 import { Mail } from "lucide-react";
-import {
-  IconTwitter, IconLinkedin, IconInstagram,
-  IconMedium, IconSubstack, IconTopmate
-} from "@/components/SocialIcons";
+// import {
+//   IconTwitter, IconLinkedin, IconInstagram,
+//   IconMedium, IconSubstack, IconTopmate
+// } from "@/components/SocialIcons";
 
-const socialLinks = [
-  { label: "X", href: siteConfig.socials.twitter, Icon: IconTwitter },
-  { label: "LinkedIn", href: siteConfig.socials.linkedin, Icon: IconLinkedin },
-  { label: "Instagram", href: siteConfig.socials.instagram, Icon: IconInstagram },
-  { label: "Medium", href: siteConfig.socials.medium, Icon: IconMedium },
-  { label: "Substack", href: siteConfig.socials.substack, Icon: IconSubstack },
-  { label: "Topmate", href: siteConfig.socials.topmate, Icon: IconTopmate },
-].filter((l) => l.href);
+// const socialLinks = [
+//   { label: "X", href: siteConfig.socials.twitter, Icon: IconTwitter },
+//   { label: "LinkedIn", href: siteConfig.socials.linkedin, Icon: IconLinkedin },
+//   { label: "Instagram", href: siteConfig.socials.instagram, Icon: IconInstagram },
+//   { label: "Medium", href: siteConfig.socials.medium, Icon: IconMedium },
+//   { label: "Substack", href: siteConfig.socials.substack, Icon: IconSubstack },
+//   { label: "Topmate", href: siteConfig.socials.topmate, Icon: IconTopmate },
+// ].filter((l) => l.href);
 
 export default function AboutPage() {
   return (
@@ -98,7 +98,7 @@ export default function AboutPage() {
 </div>
 
         {/* Social icons */}
-        <div className="flex flex-wrap items-center gap-2 pt-1">
+        {/* <div className="flex flex-wrap items-center gap-2 pt-1">
           {socialLinks.map(({ label, href, Icon }) => (
             <a
               key={label}
@@ -122,7 +122,7 @@ export default function AboutPage() {
               <Mail size={14} />
             </a>
           )}
-        </div>
+        </div> */}
       </section>
 
       {/* Quote */}
