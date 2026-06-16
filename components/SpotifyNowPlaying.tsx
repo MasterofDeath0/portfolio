@@ -42,9 +42,9 @@ export default function SpotifyNowPlaying() {
     return () => clearInterval(interval);
   }, []);
 
+  // {/* className="flex items-center gap-2 text-sm" */}
   return (
     <div
-      {/* className="flex items-center gap-2 text-sm" */}
       className="flex items-center gap-2 text-sm min-w-0"
       style={{ color: "var(--muted-foreground)" }}
     >
