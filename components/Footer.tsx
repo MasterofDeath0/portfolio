@@ -62,10 +62,13 @@ export default function Footer() {
       className="border-t mt-8"
       style={{ borderColor: "var(--border)" }}
     >
-      <div className="container mx-auto max-w-2xl px-4 py-12">
+      {/* <div className="container mx-auto max-w-2xl px-4 py-12"> */}
+      <div className="container mx-auto max-w-2xl px-4 py-8">
+        {/* <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between"> */}
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
           {/* Navigate */}
-          <div className="flex flex-col gap-4">
+          {/* <div className="flex flex-col gap-4"> */}
+          <div className="flex flex-col gap-2.5">
             <p
               className="text-xs font-semibold uppercase tracking-widest"
               style={{ color: "var(--muted-foreground)" }}
@@ -73,7 +76,7 @@ export default function Footer() {
               Navigate
             </p>
 
-            <nav className="grid grid-cols-4 gap-x-6 gap-y-2">
+            <nav className="grid grid-cols-4 gap-x-4 gap-y-1.5">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -96,7 +99,7 @@ export default function Footer() {
               Connect
             </p>
 
-            <div className="grid grid-cols-4 gap-2">
+            <div className="flex flex-wrap items-center gap-1.5">
               {connectLinks.map(({ label, href, Icon }) => (
                 <a
                   key={label}
@@ -104,7 +107,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex items-center justify-center w-9 h-9 rounded-lg border transition-all duration-200 hover:bg-zinc-800 hover:border-zinc-600 hover:text-white"
+                  className="flex items-center justify-center w-8 h-8 rounded-lg border transition-all duration-200 hover:bg-zinc-800 hover:border-zinc-600 hover:text-white"
                   style={{
                     borderColor: "var(--border)",
                     color: "var(--muted-foreground)",
@@ -133,7 +136,9 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div
-          className="mt-10 pt-6 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs"
+          {/* className="mt-10 pt-6 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs"
+          */}
+        className="mt-6 pt-4 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs"
           style={{
             borderColor: "var(--border)",
             color: "var(--muted-foreground)",
