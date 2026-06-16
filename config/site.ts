@@ -9,7 +9,6 @@ export const siteConfig = {
   description: "I'm a curious mind with many interests and a relentless drive to keep growing.",
   seoDescription: "Life is this. I like this.",
 
-  googleAnalyticsId: "",
   socials: {
     twitter: "https://x.com/Super_Sanyam18",
     linkedin: "https://www.linkedin.com/in/sanyam-aggarwal-0796351a0",
@@ -18,5 +17,6 @@ export const siteConfig = {
     topmate: "https://topmate.io/sanyam_aggarwal",
     substack: "https://substack.com/@supersanyam?r=ccx8w&utm_campaign=profile&utm_medium=profile-page",
     email: "mailto:sanyam1891@gmail.com",
+    instagram2: "https://www.instagram.com/gobletofthoughts?r=nametag"
   },
 };
